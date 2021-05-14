@@ -1,0 +1,53 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f8f9fa;
+  padding: 10px 25px;
+
+  .header__left {
+    display: flex;
+    .brand__logo {
+      img {
+        width: 50px;
+      }
+      margin-right: 10px;
+    }
+    .brand__name {
+      font-weight: 600;
+      text-transform: uppercase;
+      .group__name {
+        font-weight: 700;
+        font-size: 20px;
+      }
+      font-size: 14px;
+    }
+  }
+  .header__right {
+    width: 350px;
+    button {
+      width: 150px;
+      padding: 5px;
+      border-radius: 0;
+    }
+    .searchForm {
+      display: flex;
+      
+      
+      
+      .form-control {
+        color: #29303b;
+        border: 1px solid #f2f3f5;
+        background-color: #f2f3f5;
+        border: transparent;
+        border-radius: 0;
+        &:focus {
+          box-shadow: none;
+          background-color: #fff;
+          border: 1px solid #dedfe0;
+          border-right: transparent;
+        }
+      }
+    }
+  }
+}
