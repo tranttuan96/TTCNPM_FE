@@ -2,18 +2,17 @@ import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { NavLink } from "react-router-dom"
 import { qlMonAnService } from "../../services/quanLyMonAnService"
-import "../../assets/scss/Layout/User/Homepage.scss"
+import "../../assets/scss/Layout/User/Searchpage.scss"
 import ListDish from './ListDish';
 import CurrencyFormat from 'react-currency-format';
 
-export default function Homepage() {
+export default function Searchpage(props) {
 
     const thongTinGioHang = useSelector((state) => state.GioHangReducer)
     const [danhSachMonAn, setDanhSachMonAn] = useState([]);
 
     useEffect(() => {
-        //Gọi service Api set lại state danhSachMonAn
-        qlMonAnService.layDanhSachMonAn().then(res => {
+        qlMonAnService.timKiemMonAn(props.match.params.tuKhoa).then(res => {
             setDanhSachMonAn(res.data);
         }).catch(error => {
             console.log(error.response.data);
@@ -37,10 +36,9 @@ export default function Homepage() {
         </div>
     }
 
-
     return (
-        <div className="homepage">
-            <h3 className="menu_title">Thực đơn</h3>
+        <div className="searchPage">
+            <h3 className="menu_title">Kết quả tìm kiếm</h3>
             <ListDish danhSachMonAn={danhSachMonAn} gioHang={thongTinGioHang.gioHang}></ListDish>
             {thongTinGioHang.totalQuantity > 0 ? renderCartInfo() : <div></div>}
         </div>

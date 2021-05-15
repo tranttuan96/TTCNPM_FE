@@ -1,10 +1,10 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { Route, NavLink } from "react-router-dom";
+import { Route, useHistory, NavLink } from "react-router-dom";
 import "./UserTemplate.scss"
 
 
 const UserLayout = (props) => {
-
+    let history = useHistory();
     const [keyword, setKeyword] = useState("");
 
     const handleChange = (event) => {
@@ -12,32 +12,38 @@ const UserLayout = (props) => {
     }
 
     const handleSubmit = (event) => {
-        event.preventDefault();
-
-        alert(keyword)
+        event.preventDefault(); 
+        if(keyword == "") {
+            alert("Từ khóa rỗng.")
+        }
+        else {
+            history.push(`/search/keyword=${keyword}`)
+        }
     }
+
+    
 
     return (
         <Fragment>
             <div className="header">
                 <div className="header__left">
-                    <a className="brand__logo" href="#">
-                        <img src={"/images/1004px-Logo-hcmut.svg.png"} alt="" />
-                    </a>
+                    <NavLink to="/" className="brand__logo">
+                        <img src={"/images/1004px-Logo-hcmut.svg.png"} alt="logo" />
+                    </NavLink>
                     <span className="brand__name">
                         <div className="group__name">C2TB</div>
                         Restaurant
                     </span>
                 </div>
                 <div className="header__right">
-                    <form onSubmit={handleSubmit} className="searchForm">
+                    <form className="searchForm" onSubmit={handleSubmit}>
                         <input
                             type="text"
                             className="form-control"
                             placeholder="Tìm kiếm món ăn"
                             onChange={handleChange}
                         />
-                        <button className="btn btn-primary">Tìm kiếm</button>
+                        <button className="btn btn-secondary"><i className="fa fa-search"></i></button>
                     </form>
                 </div>
 
