@@ -2,8 +2,11 @@ import { BrowserRouter, Switch } from 'react-router-dom'
 import CartPage from './pages/User/CartPage';
 import Homepage from './pages/User/Homepage';
 import Searchpage from './pages/User/Searchpage';
+import HomeAdmin from './pages/Admin/HomeAdmin';
+import QuanLyThucDon from './pages/Admin/QuanLyThucDon';
 import { UserTemplate } from './templates/UserTemplate/UserTemplate';
 import { BlankTemplate } from './templates/BlankTemplate/BlankTemplate';
+import { AdminTemplate } from './templates/AdminTemplate/AdminTemplate';
 function App() {
   return (
     <BrowserRouter>
@@ -11,6 +14,9 @@ function App() {
         <UserTemplate exact path='/search/keyword=:tuKhoa' component={Searchpage}/>
         <BlankTemplate exact path='/cart' component={CartPage}/>
         <UserTemplate exact path='/' component={Homepage}/>
+				<AdminTemplate exact path='/admin' component={HomeAdmin}/>
+				<AdminTemplate exact path='/admin/quanlythucdon' component={QuanLyThucDon}/>
+				{/* <AdminTemplate exact path='/admin/baocaodoanhthu' component={BaoCaoDoanhThu}/> */}
       </Switch>
     </BrowserRouter>
   );
