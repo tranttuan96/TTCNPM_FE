@@ -1,0 +1,27 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #F3F2EE;
+    padding: 10px 25px;
+  
+    .header__left {
+      display: flex;
+      .brand__logo {
+        img {
+          width: 50px;
+        }
+        margin-right: 10px;
+      }
+      .brand__name {
+        font-weight: 600;
+        text-transform: uppercase;
+        .group__name {
+          font-weight: 700;
+          font-size: 20px;
+        }
+        font-size: 14px;
+      }
+    }
+
+  }

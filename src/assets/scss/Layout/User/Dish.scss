@@ -1,0 +1,27 @@
+.card {
+    width: 100%;
+    margin-bottom: 50px;
+    img {
+        width: 100%;
+        height: 300px;
+    }
+    .card-body {
+        .card-title {
+            a {
+                color: black;
+                text-decoration: none;
+            }
+        }
+        .wrapper {
+            display: flex;
+            justify-content: space-between;
+            .card-text {
+                font-weight: 600;
+                font-size: 20px;
+                letter-spacing: .5px;
+                margin-bottom: 0;
+            }
+        }
+        }
+        
+}
