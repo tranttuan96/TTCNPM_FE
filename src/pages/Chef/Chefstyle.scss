@@ -1,0 +1,54 @@
+
+
+.main{
+    height: 500px; 
+}
+.order_list_panel_left {
+    display: inline-block;
+    width: 40%;
+    height: 500px;
+    text-align: left;
+    overflow-y: auto;
+    color: blue;
+    padding-left: 2%;
+    margin-bottom: 1.5%;
+       
+}
+  .order_view_panel_right{
+    display: inline-block;
+    width: 60%;
+    height: 600px;
+    text-align: right;
+    background: #cfe2ff;
+    padding: 2%;
+    justify-content: center;
+
+    //color: blue;
+    .btn_div
+    {
+      text-align: right bottom;
+      right: 0;
+    }
+       
+  }
+  .one_order{
+    background-color: lightblue; 
+    padding-right: 2%;
+    padding-top: 1%;
+    text-align: center;
+  }
+
+  .order_view
+  {
+    display: block;
+    width: 500px;
+    height: 450px;
+    background:white;
+    margin-bottom: 1.5%;
+    text-align: center;
+    justify-content: center;
+    background-color: red;
+    /* Center vertically and horizontally */
+    position: absolute;
+    left: 50%;
+  }
