@@ -1,54 +1,54 @@
 
 
-.main{
-    height: 500px; 
-}
+// .main{
+//     height: 500px; 
+// }
 .order_list_panel_left {
     display: inline-block;
     width: 40%;
-    height: 500px;
-    text-align: left;
+    height: 300px;
+    //text-align: left;
     overflow-y: auto;
-    color: blue;
-    padding-left: 2%;
-    margin-bottom: 1.5%;
+    //padding-left: 2%;
+   // margin-bottom: 1.5%;
        
 }
   .order_view_panel_right{
-    display: inline-block;
+    display: flex;
+    //display: inline-block;
+    
     width: 60%;
     height: 600px;
-    text-align: right;
+   
     background: #cfe2ff;
     padding: 2%;
     justify-content: center;
-
-    //color: blue;
-    .btn_div
-    {
-      text-align: right bottom;
-      right: 0;
-    }
        
   }
   .one_order{
-    background-color: lightblue; 
-    padding-right: 2%;
-    padding-top: 1%;
-    text-align: center;
+   // background-color: lightblue; 
+    //padding-right: 2%;
+   // padding: 0.5%;
   }
-
+  .btn_div
+  {
+    position:relative;
+   top:90%; 
+   left:0%;
+   
+  }
   .order_view
   {
-    display: block;
-    width: 500px;
-    height: 450px;
-    background:white;
+  position:relative;
+  // display: flex;
+   top:15%; 
+   
+   height:60%;
+   width:35%;
+  text: center;
     margin-bottom: 1.5%;
-    text-align: center;
-    justify-content: center;
-    background-color: red;
-    /* Center vertically and horizontally */
+    background-color:beige;
+
     position: absolute;
     left: 50%;
   }
