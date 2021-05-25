@@ -4,6 +4,8 @@ import Homepage from './pages/User/Homepage';
 import Searchpage from './pages/User/Searchpage';
 import HomeAdmin from './pages/Admin/HomeAdmin';
 import QuanLyThucDon from './pages/Admin/QuanLyThucDon';
+import AdminSearchpage from './pages/Admin/AdminSearchpage';
+import BaoCaoDoanhThu from './pages/Admin/BaoCaoDoanhThu';
 import { UserTemplate } from './templates/UserTemplate/UserTemplate';
 import { BlankTemplate } from './templates/BlankTemplate/BlankTemplate';
 import { AdminTemplate } from './templates/AdminTemplate/AdminTemplate';
@@ -16,7 +18,8 @@ function App() {
         <UserTemplate exact path='/' component={Homepage}/>
 				<AdminTemplate exact path='/admin' component={HomeAdmin}/>
 				<AdminTemplate exact path='/admin/quanlythucdon' component={QuanLyThucDon}/>
-				{/* <AdminTemplate exact path='/admin/baocaodoanhthu' component={BaoCaoDoanhThu}/> */}
+				<AdminTemplate exact path='/admin/quanlythucdon/search/keyword=:tuKhoa' component={AdminSearchpage}/>
+				<AdminTemplate exact path='/admin/baocaodoanhthu' component={BaoCaoDoanhThu}/>
       </Switch>
     </BrowserRouter>
   );

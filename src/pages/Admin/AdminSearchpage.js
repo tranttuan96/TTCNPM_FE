@@ -29,7 +29,7 @@ export default class MyComponent extends React.Component {
       formData: new FormData(),
     };
 
-    // this.onImageChange = this.onImageChange.bind(this);
+    this.onImageChange = this.onImageChange.bind(this);
   }
 
   async fetchJSON(url) {
@@ -124,7 +124,7 @@ export default class MyComponent extends React.Component {
 
   componentDidMount() {
     this.intervalId = setInterval(() => {
-      this.fetchJSON("http://localhost:8080/dish")
+      this.fetchJSON("http://localhost:8080/dish/" + this.props.match.params.tuKhoa)
         .then((data) => {
           this.setState({
             ...this.state,

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, Fragment } from "react";
-import { Route, NavLink, Redirect } from "react-router-dom";
+import { Route, NavLink, useHistory } from "react-router-dom";
+import "../AdminTemplate/AdminTemplate.scss";
 import "../UserTemplate/UserTemplate.scss";
 // import ShowLogin from '../UserTemplate/ShowLogin'
 
@@ -12,6 +13,9 @@ const AdminLayout = (props) => {
     quanLyThucDon: true,
     baoCaoDoanhThu: false,
   });
+
+  let history = useHistory();
+  const [keyword, setKeyword] = useState("");
 
   // const dangXuat = () => {
   //     // console.log(taiKhoan)
@@ -30,6 +34,19 @@ const AdminLayout = (props) => {
       temp.quanLyThucDon = false;
       temp.baoCaoDoanhThu = true;
       setNavActive(temp);
+    }
+  };
+
+  const handleChange = (event) => {
+    setKeyword(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (keyword == "") {
+      alert("Từ khóa rỗng.");
+    } else {
+      history.push(`/admin/quanlythucdon/search/keyword=${keyword}`);
     }
   };
 
@@ -113,9 +130,14 @@ const AdminLayout = (props) => {
                 <img
                   src={"/images/1004px-Logo-hcmut.svg.png"}
                   style={{ width: 45, height: 45 }}
-                />{" "}
-                Admin
+                />
               </NavLink>
+              <span className="brand__name">
+                <div className="group__name">
+                  <b>C2TB</b>
+                </div>
+                Restaurant - Admin
+              </span>
             </div>
             <div
               className="header__center col-4 d-none d-md-flex"
@@ -154,9 +176,28 @@ const AdminLayout = (props) => {
                 </li>
               </ul>
             </div>
+
+            {navActive.quanLyThucDon ? (
+              <div className="header__right">
+                <form className="searchForm" onSubmit={handleSubmit}>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Tìm kiếm món ăn"
+                    onChange={handleChange}
+                  />
+                  <button className="btn btn-secondary">
+                    <i className="fa fa-search"></i>
+                  </button>
+                </form>
+              </div>
+            ) : (
+              <div></div>
+            )}
+
             {/* <div className="header__right col-4 d-none d-md-flex">
               <ShowLogin></ShowLogin>
-            </div> */}
+            </div>
             <button
               className="navbar-toggler responsiveMenuButton"
               type="button"
@@ -169,7 +210,7 @@ const AdminLayout = (props) => {
               <span className="navbar-toggler-icon"></span>
             </button>
 
-            {/* <div className="responsiveMenu d-flex d-md-none col-8">
+            <div className="responsiveMenu d-flex d-md-none col-8">
               {renderResponsiveMenu()}
             </div> */}
           </nav>
@@ -196,11 +237,11 @@ export const AdminTemplate = (props) => (
       // }
       // return <Redirect to="/login" />;
 
-			return (
-				<AdminLayout>
-					<props.component {...propsComponent} />
-				</AdminLayout>
-			);
+      return (
+        <AdminLayout>
+          <props.component {...propsComponent} />
+        </AdminLayout>
+      );
     }}
   />
 );
