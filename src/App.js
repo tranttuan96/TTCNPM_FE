@@ -15,11 +15,11 @@ function App() {
       <Switch>
         <UserTemplate exact path='/search/keyword=:tuKhoa' component={Searchpage}/>
         <BlankTemplate exact path='/cart' component={CartPage}/>
-        <UserTemplate exact path='/' component={Homepage}/>
 				<AdminTemplate exact path='/admin' component={HomeAdmin}/>
 				<AdminTemplate exact path='/admin/quanlythucdon' component={QuanLyThucDon}/>
 				{/* <AdminTemplate exact path='/admin/baocaodoanhthu' component={BaoCaoDoanhThu}/> */}
         <ChefTemplate exact path='/chef' component={Chefpage} />
+        <UserTemplate exact path='/' component={Homepage}/>
       </Switch>
     </BrowserRouter>
   );

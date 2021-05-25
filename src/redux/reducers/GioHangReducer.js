@@ -13,7 +13,7 @@ const GioHangReducer = (state = stateGioHang, action) => {
                 gioHangUpdate.push(action.orderItem);
                 //Gán giỏ hàng cũ = giỏ hàng mới (vì tính bất biến của redux)
                 let totalPriceUpdate = gioHangUpdate.reduce((tongTien, spGH) => {
-                    return tongTien += spGH.quantity*spGH.price;
+                    return tongTien += spGH.quantity * spGH.price;
                 }, 0)
                 let totalQuantityUpdate = gioHangUpdate.reduce((tongSoLuong, spGH) => {
                     return tongSoLuong += spGH.quantity;
@@ -40,7 +40,24 @@ const GioHangReducer = (state = stateGioHang, action) => {
                     }
                 }
                 let totalPriceUpdate = gioHangUpdate.reduce((tongTien, spGH) => {
-                    return tongTien += spGH.quantity*spGH.price;
+                    return tongTien += spGH.quantity * spGH.price;
+                }, 0)
+                let totalQuantityUpdate = gioHangUpdate.reduce((tongSoLuong, spGH) => {
+                    return tongSoLuong += spGH.quantity;
+                }, 0)
+                //Gán giỏ hàng cũ = giỏ hàng mới (vì tính bất biến của redux)
+                state.gioHang = gioHangUpdate;
+                state.totalPrice = totalPriceUpdate;
+                state.totalQuantity = totalQuantityUpdate;
+                return { ...state }
+            }; break;
+        case "XOA_MON":
+            {
+                let gioHangUpdate = [...state.gioHang]; //sao chép giỏ hàng mới
+                let index = gioHangUpdate.findIndex(spGH => spGH.id === action.dishID);
+                gioHangUpdate.splice(index, 1);
+                let totalPriceUpdate = gioHangUpdate.reduce((tongTien, spGH) => {
+                    return tongTien += spGH.quantity * spGH.price;
                 }, 0)
                 let totalQuantityUpdate = gioHangUpdate.reduce((tongSoLuong, spGH) => {
                     return tongSoLuong += spGH.quantity;
