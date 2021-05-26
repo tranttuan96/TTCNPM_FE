@@ -17,7 +17,7 @@ export default function Searchpage(props) {
         }).catch(error => {
             console.log(error.response.data);
         });
-    }, []);
+    }, [props.match.params.tuKhoa]);
 
     const renderCartInfo = () => {
         return <div className="cartInfo__wrapper">

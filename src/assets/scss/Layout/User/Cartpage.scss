@@ -41,7 +41,7 @@
       }
     }
 
-    a {
+    button {
       margin-top: 10px;
       width: 100%;
     }
@@ -84,5 +84,36 @@
         }
       }
     }
+  }
+}
+
+.emptyCart {
+  height: calc(100vh - 160px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .wrapper {
+    text-align: center;
+    img {
+      width: 200px;
+    }
+    .notification {
+      font-size: 30px;
+      margin-top: 10px;
+      margin-bottom: 20px;
+    }
+    a {
+      font-size: 20px;
+    }
+  }
+}
+
+.orderConfirmed {
+  height: calc(100vh - 160px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .wrapper {
+    text-align: center;
   }
 }
