@@ -19,3 +19,9 @@ export const xoaMonAction = (dishID) => {
         dishID
     }
 }
+
+export const xoaGioHangAction = () => {
+    return {
+        type:'XOA_GIO_HANG'
+    }
+}

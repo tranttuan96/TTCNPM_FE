@@ -41,7 +41,7 @@
       }
     }
 
-    a {
+    button {
       margin-top: 10px;
       width: 100%;
     }
@@ -105,5 +105,15 @@
     a {
       font-size: 20px;
     }
+  }
+}
+
+.orderConfirmed {
+  height: calc(100vh - 160px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .wrapper {
+    text-align: center;
   }
 }

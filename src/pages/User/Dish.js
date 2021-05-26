@@ -21,6 +21,7 @@ export default function Dish(props) {
             name:dish.name,
             price:dish.price,
             photo:dish.photo,
+            status: dish.status,
             quantity: 1,
         }
         dispatch(themMonAction(orderItem))

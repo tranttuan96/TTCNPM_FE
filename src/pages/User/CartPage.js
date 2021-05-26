@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { NavLink } from "react-router-dom"
-import { capNhatSoLuongMonAction, xoaMonAction } from "../../redux/actions/GioHangAction"
+import { capNhatSoLuongMonAction, xoaMonAction, xoaGioHangAction } from "../../redux/actions/GioHangAction"
+import { qlDonHangService } from "../../services/quanLyDonHangService"
 import { domain } from '../../setting/config';
 import "../../assets/scss/Layout/User/Cartpage.scss"
 import CurrencyFormat from 'react-currency-format';
@@ -9,6 +10,7 @@ import CurrencyFormat from 'react-currency-format';
 export default function CartPage() {
 
     const [isConfirm, setIsConfirm] = useState(false);
+    const [orderInfo, setOrderInfo] = useState({});
     const dispatch = useDispatch();
     const thongTinGioHang = useSelector((state) => state.GioHangReducer)
 
@@ -18,11 +20,30 @@ export default function CartPage() {
 
     const deleteItem = (dishID) => {
         dispatch(xoaMonAction(dishID))
+
+    }
+
+    const confirmOrder = () => {
+        let cartInfo = {
+            totalPrice: thongTinGioHang.totalPrice,
+            orderItems: thongTinGioHang.gioHang
+        }
+        qlDonHangService.xacNhanDatMon(cartInfo).then(res => {
+            setOrderInfo(res.data);
+            setIsConfirm(true);
+            dispatch(xoaGioHangAction())
+        }).catch(error => {
+            console.log(error.response.data);
+        });
     }
 
     const renderOrderConfirmed = () => {
         return <div className="orderConfirmed">
-            Order ID: 12312312
+            <div className="wrapper">
+                <div className="notification">Đặt hàng thành công.</div>
+                <div className="orderID">Mã đơn hàng: {orderInfo.orderID}</div>
+                <NavLink to={`/checkout/${orderInfo.orderID}`} className="btn btn-primary">Tiến hành thanh toán</NavLink>
+            </div>
         </div>
     }
 
@@ -88,7 +109,7 @@ export default function CartPage() {
                             </div>
                         </div>
                     </div>
-                    <NavLink className="btn btn-success" to="/cart">Tiến hành đặt món</NavLink>
+                    <button className="btn btn-success" onClick={() => confirmOrder()}>Tiến hành đặt món</button>
                 </div>
             </div>
         </div>
@@ -96,7 +117,7 @@ export default function CartPage() {
 
     return (
         <div className="cartPage">
-            {isConfirm ? renderOrderConfirmed() : (thongTinGioHang.totalPrice === 0 ? renderEmptyCart() : renderCartInfo())}        
+            {isConfirm ? renderOrderConfirmed() : (thongTinGioHang.totalPrice === 0 ? renderEmptyCart() : renderCartInfo())}
         </div>
     )
 }

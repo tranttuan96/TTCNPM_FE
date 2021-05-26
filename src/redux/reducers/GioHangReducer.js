@@ -68,6 +68,19 @@ const GioHangReducer = (state = stateGioHang, action) => {
                 state.totalQuantity = totalQuantityUpdate;
                 return { ...state }
             }; break;
+        case "XOA_GIO_HANG":
+            {
+                // console.log("run")
+                // let gioHangUpdate = [...state.gioHang]; //sao chép giỏ hàng mới
+                // gioHangUpdate.slice(0, gioHangUpdate.length)
+                // let totalPriceUpdate = 0;
+                // let totalQuantityUpdate = 0;
+                //Gán giỏ hàng cũ = giỏ hàng mới (vì tính bất biến của redux)
+                state.gioHang = [];
+                state.totalPrice = 0;
+                state.totalQuantity = 0;
+                return { ...state }
+            }; break;
     }
 
 
