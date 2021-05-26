@@ -12,6 +12,7 @@ import { AdminTemplate } from './templates/AdminTemplate/AdminTemplate';
 import { ChefTemplate } from './templates/ChefTemplate/ChefTemplate';
 import Chefpage from './pages/Chef/Chefpage.js';
 import Checkout from './pages/User/Checkout';
+import UpdateDishStt from './pages/Chef/UpdateDishStatus';
 function App() {
   return (
     <BrowserRouter>
@@ -20,9 +21,12 @@ function App() {
         <BlankTemplate exact path='/checkout/:orderID' component={Checkout}/>
         <BlankTemplate exact path='/cart' component={CartPage}/>
         <ChefTemplate exact path='/chef' component={Chefpage} />
+        <ChefTemplate exact path='/stt' component={UpdateDishStt} />
 				<AdminTemplate exact path='/admin/quanlythucdon/search/keyword=:tuKhoa' component={AdminSearchpage}/>
 				<AdminTemplate exact path='/admin/baocaodoanhthu' component={BaoCaoDoanhThu}/>
         <UserTemplate exact path='/' component={Homepage}/>
+        <AdminTemplate exact path='/admin' component={HomeAdmin}/>
+				<AdminTemplate exact path='/admin/quanlythucdon' component={QuanLyThucDon}/>
       </Switch>
     </BrowserRouter>
   );
