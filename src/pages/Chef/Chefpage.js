@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import "./Chefstyle.scss"
-import { NavLink } from "react-router-dom"
+// import { NavLink } from "react-router-dom"
 import Modal from 'react-bootstrap/Modal'
 
 
@@ -44,7 +44,7 @@ export default function Chefpage() {
                        {/* <Card.Title >info 1</Card.Title> */}
                        {/* <NavLink to="/">{dish.name}</NavLink> */}
                        info 1
-                       <Card.Content></Card.Content>
+                       {/* <Card.Content></Card.Content> */}
                        <Button type="button" variant="success"  onClick= {handleShow} size="sm" >
                        Confirm
                        </Button>
