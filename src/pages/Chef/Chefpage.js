@@ -2,9 +2,24 @@ import React, {useState, useEffect} from 'react'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import "./Chefstyle.scss"
+// import { NavLink } from "react-router-dom"
 import Modal from 'react-bootstrap/Modal'
 
+
 export default function Chefpage() {
+
+   // const orderList = (dish) => {
+      //  let orderItem = {
+           // id: orderItems.order_id,
+          //  name:dish.name,
+           // price:orderItems.price,
+           // quantity:orderItems.quantity,
+           // status: orderItems.status,
+   //     }
+      //  dispatch(showList(orderItem))
+  //  }
+   // const dispatch = useDispatch();
+   // let { order, setOder } = props;
 
    function say() {
        alert('Check!');
@@ -21,11 +36,15 @@ export default function Chefpage() {
        <section className ="container">
            {/* <div className="main"> */}
                <div className="order_list_panel_left">
+                   <div className="title_left_div">Title</div>
                    <div className="one_order">
                    <Card>
-                   {/* <Card.Header class="card-header d-flex justify-content-between ">OrderID</Card.Header> */}
+                   { <Card.Header class="card-header d-flex justify-content-between ">OrderID</Card.Header>}
                    <Card.Body className=" d-flex justify-content-between" >
-                       <Card.Title >info 1</Card.Title>
+                       {/* <Card.Title >info 1</Card.Title> */}
+                       {/* <NavLink to="/">{dish.name}</NavLink> */}
+                       info 1
+                       {/* <Card.Content></Card.Content> */}
                        <Button type="button" variant="success"  onClick= {handleShow} size="sm" >
                        Confirm
                        </Button>
@@ -35,10 +54,11 @@ export default function Chefpage() {
 
                    <div className="one_order">
                    <Card>
-                   {/* <Card.Header class="card-header d-flex justify-content-between ">OrderID</Card.Header> */}
-                   <Card.Body className=" d-flex justify-content-between " >
-                       <Card.Title >info 2</Card.Title>
-                       <Button type="button"className="btn btn-success" onClick= {handleShow} size="sm" >
+                   { <Card.Header class="card-header d-flex justify-content-between ">OrderID</Card.Header>}
+                   <Card.Body className=" d-flex justify-content-between" >
+                       {/* <Card.Title >info 1</Card.Title> */}
+                       Info o 2
+                       <Button type="button" variant="success"  onClick= {handleShow} size="sm" >
                        Confirm
                        </Button>
                    </Card.Body>
@@ -47,15 +67,18 @@ export default function Chefpage() {
 
                    <div className="one_order">
                    <Card>
-                   {/* <Card.Header class="card-header d-flex justify-content-between ">OrderID</Card.Header> */}
-                   <Card.Body className="card-body d-flex justify-content-between " onClick={say} >
-                       <Card.Title >info 3</Card.Title>
-                       <Button type="button"className="btn btn-success"  onClick={say} size="sm" >
+                   { <Card.Header class="card-header d-flex justify-content-between ">OrderID</Card.Header>}
+                   <Card.Body className=" d-flex justify-content-between" >
+                       {/* <Card.Title >info 1</Card.Title> */}
+                       Info o 3
+                       <Button type="button" variant="success"  onClick= {handleShow} size="sm" >
                        Confirm
                        </Button>
                    </Card.Body>
                    </Card>
                    </div>
+                    
+
 
 
                </div>
@@ -97,5 +120,6 @@ export default function Chefpage() {
 
    )
 }
+
 
 

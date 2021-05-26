@@ -2,14 +2,9 @@ import React from "react";
 import { domain } from "../../setting/config";
 import { Line } from "react-chartjs-2";
 import { Container, Row, Col, Button, Form } from "react-bootstrap";
-// import QuickChart from "quickchart-js";
-const fs = require("fs");
-const { CanvasRenderService } = require("chartjs-node-canvas");
 // npm install react-bootstrap bootstrap
-// npm install react-chartjs-2
-// npm install quickchart-js
-// npm install chartjs-node-canvas
 // npm install chart.js
+// npm install react-chartjs-2
 
 export default class MyComponent extends React.Component {
   // interval = null;

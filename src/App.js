@@ -12,6 +12,7 @@ import { AdminTemplate } from './templates/AdminTemplate/AdminTemplate';
 import { ChefTemplate } from './templates/ChefTemplate/ChefTemplate';
 import Chefpage from './pages/Chef/Chefpage.js';
 import Checkout from './pages/User/Checkout';
+import UpdateDishStt from './pages/Chef/UpdateDishStatus';
 function App() {
   return (
     <BrowserRouter>
@@ -24,6 +25,7 @@ function App() {
 				<AdminTemplate exact path='/admin/quanlythucdon/search/keyword=:tuKhoa' component={AdminSearchpage}/>
 				<AdminTemplate exact path='/admin/baocaodoanhthu' component={BaoCaoDoanhThu}/>
         <ChefTemplate exact path='/chef' component={Chefpage} />
+				<ChefTemplate exact path='/stt' component={UpdateDishStt} />
         <UserTemplate exact path='/' component={Homepage}/>
       </Switch>
     </BrowserRouter>
