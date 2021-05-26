@@ -17,6 +17,7 @@ const UserLayout = (props) => {
             alert("Từ khóa rỗng.")
         }
         else {
+            // history.replace({ pathname:`/search/keyword=${keyword}` })
             history.push(`/search/keyword=${keyword}`)
         }
     }
