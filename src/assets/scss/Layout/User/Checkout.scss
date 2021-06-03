@@ -1,0 +1,171 @@
+.checkoutPage {
+  padding: 0 80px;
+  padding-top: 20px;
+  margin-bottom: 30px;
+  h4 {
+    color: rgb(95, 95, 95);
+  }
+  .listPaymentMethod {
+    padding-right: 20px;
+    .listPaymentMethod__content {
+      border: 1px solid #6e6e6e9f;
+      border-radius: 5px;
+      padding: 15px 25px 10px 15px;
+      
+      .eWalletSelection {
+        padding: 0 15px;
+        margin: 0px 0px 0px 32px;
+        display: none;
+        .form-check {
+          margin: 0;
+          margin-bottom: 20px;
+
+          img {
+            width: 30px;
+            margin-left: 10px;
+          }
+        }
+      }
+
+
+      .cardFormInput {
+        border: 0.5px solid rgb(199, 199, 199);
+        padding: 15px;
+        margin: 0px 0px 0px 32px;
+        border-radius: 4px;
+        display: none;
+      }
+
+      .listBank {
+        border: 0.5px solid rgb(199, 199, 199);
+        padding: 15px;
+        margin: 0px 0px 0px 32px;
+        border-radius: 4px;
+        list-style: none;
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 10px;
+        display: none;
+        .atm {
+            border: 1px dashed rgb(204, 204, 204);
+            padding: 5px;
+            border-radius: 3px;
+            height: 65px;
+            display: flex;
+            -webkit-box-align: center;
+            align-items: center;
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                max-width: 100%;
+            }
+        }
+        .atm-active {
+          border: 2px solid rgb(189, 52, 136)
+        }
+      }
+
+      .showSelection {
+        display: block;
+        transition: transform 0.3s ease 0s;
+      }
+      .showListBank {
+        display: grid;
+        transition: transform 0.3s ease 0s;
+      }
+
+      .form-check {
+        margin: 20px 0;
+
+        input[type="radio"] {
+          width: 22px;
+          height: 22px;
+          background-image: none;
+          border: 1px solid rgb(120, 120, 120);
+          margin-right: 10px;
+          position: relative;
+          z-index: 1;
+          &::before {
+            content: "";
+            position: absolute;
+            left: 5px;
+            top: 5px;
+            width: 10px;
+            height: 10px;
+            background-color: rgb(13, 92, 182);
+            border-radius: 50%;
+            transform: scale(0);
+            transition: transform 0.3s ease 0s;
+          }
+        }
+
+        input[type="radio"]:checked {
+          border-color: rgb(13, 92, 182);
+          background-color: transparent;
+          &::before {
+            transform: scale(1);
+          }
+        }
+
+        label {
+          font-size: 18px;
+          i {
+            font-size: 25px;
+            margin-right: 15px;
+            margin-left: 10px;
+          }
+        }
+      }
+    }
+  }
+  .summary {
+    // position: fixed;
+    // right: 40px;
+    padding-left: 10px;
+
+    .summary_content {
+      background-color: #f1f2f7;
+      border: 1px solid #6e6e6e9f;
+      border-radius: 5px;
+      .intro,
+      .orderID,
+      .finalPrice {
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+      }
+      .intro {
+        font-weight: bold;
+      }
+
+      .orderID {
+        padding: 10px 0;
+        margin: 0 10px;
+        border-top: 1px solid #6e6e6e9f;
+        border-bottom: 2px solid #6e6e6e9f;
+        .orderID__label {
+          color: #6e6e6e;
+          padding-bottom: 10px;
+        }
+      }
+
+      .finalPrice {
+        color: #6e6e6e;
+
+        .finalPrice__value {
+          text-align: right;
+          span {
+            color: green;
+            font-size: 24px;
+          }
+        }
+      }
+    }
+
+    button {
+      margin-top: 10px;
+      width: 100%;
+    }
+  }
+}

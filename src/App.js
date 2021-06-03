@@ -12,6 +12,7 @@ import { AdminTemplate } from './templates/AdminTemplate/AdminTemplate';
 import { ChefTemplate } from './templates/ChefTemplate/ChefTemplate';
 import Chefpage from './pages/Chef/Chefpage.js';
 import Checkout from './pages/User/Checkout';
+import OrderDetail from './pages/User/OrderDetail';
 function App() {
   return (
     <BrowserRouter>
@@ -19,6 +20,7 @@ function App() {
         <UserTemplate exact path='/search/keyword=:tuKhoa' component={Searchpage}/>
         <BlankTemplate exact path='/checkout/:orderID' component={Checkout}/>
         <BlankTemplate exact path='/cart' component={CartPage}/>
+        <BlankTemplate exact path='/orderdetail/:orderID' component={OrderDetail}/>
 				<AdminTemplate exact path='/admin' component={HomeAdmin}/>
 				<AdminTemplate exact path='/admin/quanlythucdon' component={QuanLyThucDon}/>
         <AdminTemplate exact path='/admin/quanlythucdon/search/keyword=:tuKhoa' component={AdminSearchpage}/>
