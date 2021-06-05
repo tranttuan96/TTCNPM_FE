@@ -122,6 +122,11 @@ export default class MyComponent extends React.Component {
     return response2;
   }
 
+	// function for checking price
+	isNumeric(value) {
+		return /^\d+$/.test(value);
+	}
+
   componentDidMount() {
     this.intervalId = setInterval(() => {
       this.fetchJSON("http://localhost:8080/dish")
@@ -207,12 +212,19 @@ export default class MyComponent extends React.Component {
               <Form
                 onSubmit={(e) => {
                   e.preventDefault();
-                  this.postData(
-                    "http://localhost:8080/dish",
-                    this.state.formData
-                  );
-
-                  this.setState({ ...this.state, showModalAdd: false });
+									let name = this.state.formData.get("name");
+									let price = this.state.formData.get("price");
+									if (name.length < 5 || name.length > 40) {
+										alert("Name must be between 5 and 40 characters!");
+									} else if (!this.isNumeric(price) || (price < 1000 || price > 20000000)) {
+										alert("Price must be between 1,000 and 20,000,000 dong!");
+									} else {
+										this.postData(
+											"http://localhost:8080/dish",
+											this.state.formData
+										);
+										this.setState({ ...this.state, showModalAdd: false });
+									}
                 }}
               >
                 <Form.Group controlId="dishName" className="my-3">
@@ -235,12 +247,13 @@ export default class MyComponent extends React.Component {
                 <Form.Group controlId="dishPrice" className="my-3">
                   <Form.Label>Giá tiền món ăn</Form.Label>
                   <Form.Control
-                    type="text"
+                    type="number"
+										step="1000"
                     required
                     onChange={(e) => {
                       e.preventDefault();
                       let newFormData = this.state.formData;
-                      newFormData.set("price", parseInt(e.target.value));
+                      newFormData.set("price", e.target.value);
                       this.setState({
                         ...this.state,
                         formData: newFormData,
@@ -293,13 +306,20 @@ export default class MyComponent extends React.Component {
               <Form
                 onSubmit={(e) => {
                   e.preventDefault();
-                  this.putData(
-                    "http://localhost:8080/dish/" +
-                      this.state.currentDish.id.toString(),
-                    this.state.formData
-                  );
-
-                  this.setState({ ...this.state, showModalUpdate: false });
+									let name = this.state.formData.get("name");
+									let price = this.state.formData.get("price");
+									if (name.length < 5 || name.length > 40) {
+										alert("Name must be between 5 and 40 characters!");
+									} else if (!this.isNumeric(price) || (price < 1000 || price > 20000000)) {
+										alert("Price must be between 1,000 and 20,000,000 dong!");
+									} else {
+										this.putData(
+											"http://localhost:8080/dish/" +
+												this.state.currentDish.id.toString(),
+											this.state.formData
+										);
+                  	this.setState({ ...this.state, showModalUpdate: false });
+									}
                 }}
               >
                 <Form.Group controlId="dishName2" className="my-3">
@@ -329,7 +349,7 @@ export default class MyComponent extends React.Component {
                     onChange={(e) => {
                       e.preventDefault();
                       let newFormData = this.state.formData;
-                      newFormData.set("price", parseInt(e.target.value));
+                      newFormData.set("price", e.target.value);
                       this.setState({
                         ...this.state,
                         formData: newFormData,
@@ -429,17 +449,9 @@ export default class MyComponent extends React.Component {
                     />
                   </td>
                   <td>
-                    <Card style={{ width: "10rem", height: "10rem" }}>
-                      <Card.Img variant="top" src={`${domain}/${dish.photo}`} />
-                      {/* <Card.Body>
-                        <Card.Title>Card Title</Card.Title>
-                        <Card.Text>
-                          Some quick example text to build on the card title and
-                          make up the bulk of the card's content.
-                        </Card.Text>
-                        <Button variant="primary">Go somewhere</Button>
-                      </Card.Body> */}
-                    </Card>
+                    <div style={{ width: "10rem", height: "10rem" }}>
+                      <img src={`${domain}/${dish.photo}`} style={{ width: "10rem", height: "10rem" }} />
+                    </div>
                   </td>
                   <td>
                     <Button

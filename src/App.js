@@ -22,7 +22,7 @@ function App() {
         <BlankTemplate exact path='/checkout/:orderID' component={Checkout}/>
         <BlankTemplate exact path='/cart' component={CartPage}/>
         <BlankTemplate exact path='/orderdetail/:orderID' component={OrderDetail}/>
-				<AdminTemplate exact path='/admin' component={HomeAdmin}/>
+				<AdminTemplate exact path='/admin' component={QuanLyThucDon}/>
 				<AdminTemplate exact path='/admin/quanlythucdon' component={QuanLyThucDon}/>
 				<AdminTemplate exact path='/admin/quanlythucdon/search/keyword=:tuKhoa' component={AdminSearchpage}/>
 				<AdminTemplate exact path='/admin/baocaodoanhthu' component={BaoCaoDoanhThu}/>
