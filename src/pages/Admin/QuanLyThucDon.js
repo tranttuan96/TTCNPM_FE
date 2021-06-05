@@ -1,19 +1,21 @@
 import React from "react";
 import {
   Container,
+	Row,
+	Col,
   Table,
   Button,
   Modal,
   Form,
   Image,
-  Card,
+	Pagination,
 } from "react-bootstrap";
 import { domain } from "../../setting/config";
 import CurrencyFormat from "react-currency-format";
 // npm install react-bootstrap bootstrap
 
 export default class MyComponent extends React.Component {
-  interval = null;
+	// interval = null;
 
   constructor(props) {
     super(props);
@@ -27,6 +29,8 @@ export default class MyComponent extends React.Component {
       currentDish: {},
       photoUrl: "",
       formData: new FormData(),
+			numberOfPages: 0,
+			currentPage: 0,
     };
 
     // this.onImageChange = this.onImageChange.bind(this);
@@ -128,25 +132,26 @@ export default class MyComponent extends React.Component {
 	}
 
   componentDidMount() {
-    this.intervalId = setInterval(() => {
-      this.fetchJSON("http://localhost:8080/dish")
-        .then((data) => {
-          this.setState({
-            ...this.state,
-            isLoaded: true,
-            dishes: data,
-          });
-        })
-        .catch((e) => {
-          console.log(e);
-          this.setState({
-            ...this.state,
-            isLoaded: true,
-            error: e,
-            // e,
-          });
-        });
-    }, 2000);
+		this.interval = setInterval(() => {
+			this.fetchJSON("http://localhost:8080/api/dishes?page=" + this.state.currentPage)
+				.then((data) => {
+					this.setState({
+						...this.state,
+						isLoaded: true,
+						dishes: data._embedded.dishes,
+						numberOfPages: data.page.totalPages,
+					});
+				})
+				.catch((e) => {
+					console.log(e);
+					this.setState({
+						...this.state,
+						isLoaded: true,
+						error: e,
+						// e,
+					});
+				});
+		}, 2000);
   }
 
   componentWillUnmount() {
@@ -178,27 +183,28 @@ export default class MyComponent extends React.Component {
       return <div>Loading...</div>;
     } else {
       console.log(this.state);
-      console.log("dish id: " + this.state.currentDish.id);
+      // console.log("dish id: " + this.state.currentDish._links.self.href.split("/")[5]);
       console.log("formData name: " + this.state.formData.get("name"));
       console.log("formData price: " + this.state.formData.get("price"));
       console.log("formData photo: " + this.state.formData.get("photo"));
       console.log("photoUrl: " + this.state.photoUrl);
 
-      let count = 1;
-
       return (
         <Container className="my-5">
-          <Button
-            className="mb-3"
-            onClick={() => {
-              this.setState({
-                ...this.state,
-                showModalAdd: true,
-              });
-            }}
-          >
-            Thêm món ăn
-          </Button>
+					<Row className="justify-content-center">
+						<Button
+							className="mb-3"
+							style={{ width: "200px" }}
+							onClick={() => {
+								this.setState({
+									...this.state,
+									showModalAdd: true,
+								});
+							}}
+						>
+							Thêm món ăn
+						</Button>
+					</Row>
 
           {/* modalAdd */}
           <Modal
@@ -219,6 +225,12 @@ export default class MyComponent extends React.Component {
 									} else if (!this.isNumeric(price) || (price < 1000 || price > 20000000)) {
 										alert("Price must be between 1,000 and 20,000,000 dong!");
 									} else {
+										let newFormData = this.state.formData;
+										newFormData.set("price", parseInt(this.state.formData.get("price")));
+										this.setState({
+											...this.state,
+											formData: newFormData,
+										});
 										this.postData(
 											"http://localhost:8080/dish",
 											this.state.formData
@@ -313,9 +325,15 @@ export default class MyComponent extends React.Component {
 									} else if (!this.isNumeric(price) || (price < 1000 || price > 20000000)) {
 										alert("Price must be between 1,000 and 20,000,000 dong!");
 									} else {
+										let newFormData = this.state.formData;
+										newFormData.set("price", parseInt(this.state.formData.get("price")));
+										this.setState({
+											...this.state,
+											formData: newFormData,
+										});
 										this.putData(
 											"http://localhost:8080/dish/" +
-												this.state.currentDish.id.toString(),
+												this.state.currentDish._links.self.href.split("/")[5],
 											this.state.formData
 										);
                   	this.setState({ ...this.state, showModalUpdate: false });
@@ -406,7 +424,7 @@ export default class MyComponent extends React.Component {
                   e.preventDefault();
                   this.deleteData(
                     "http://localhost:8080/dish/" +
-                      this.state.currentDish.id.toString()
+											this.state.currentDish._links.self.href.split("/")[5]
                   );
 
                   this.setState({ ...this.state, showModalDelete: false });
@@ -429,7 +447,7 @@ export default class MyComponent extends React.Component {
           <Table striped bordered hover>
             <thead>
               <tr>
-                <th>STT</th>
+                <th>Id</th>
                 <th>Tên</th>
                 <th>Giá tiền</th>
                 <th>Hình ảnh</th>
@@ -438,8 +456,8 @@ export default class MyComponent extends React.Component {
             </thead>
             <tbody>
               {dishes.map((dish) => (
-                <tr key={dish.id}>
-                  <td>{count++}</td>
+                <tr key={dish._links.self.href.split("/")[5]}>
+                  <td>{dish._links.self.href.split("/")[5]}</td>
                   <td>{dish.name}</td>
                   <td>
                     <CurrencyFormat
@@ -494,17 +512,68 @@ export default class MyComponent extends React.Component {
             </tbody>
           </Table>
 
-          <Button
-            className="mt-3"
-            onClick={() => {
-              this.setState({
-                ...this.state,
-                showModalAdd: true,
-              });
-            }}
-          >
-            Thêm món ăn
-          </Button>
+					{/* Pagination */}
+					<Pagination className="justify-content-center">
+						<Pagination.First onClick={(e) => {
+							e.preventDefault();
+							this.setState({
+								...this.state,
+								currentPage: 0
+							});
+						}} />
+
+						<Pagination.Prev onClick={(e) => {
+							e.preventDefault();
+							var prev = 0;
+							if (this.state.currentPage > 0) {
+								prev = this.state.currentPage - 1;
+							}
+							this.setState({
+								...this.state,
+								currentPage: prev
+							});
+						}} />
+
+						<Pagination.Item active>
+							{this.state.currentPage + 1}
+						</Pagination.Item>
+
+						<Pagination.Next onClick={(e) => {
+							e.preventDefault();
+							var next = this.state.numberOfPages - 1;
+							if (this.state.currentPage < this.state.numberOfPages - 1) {
+								next = this.state.currentPage + 1;
+							}
+							this.setState({
+								...this.state,
+								currentPage: next
+							});
+						}} />
+
+						<Pagination.Last onClick={(e) => {
+							e.preventDefault();
+							var last = this.state.numberOfPages - 1;
+							this.setState({
+								...this.state,
+								currentPage: last
+							});
+						}} />
+					</Pagination>
+
+					<Row className="justify-content-center">
+						<Button
+							className="mt-3"
+							style={{ width: "200px" }}
+							onClick={() => {
+								this.setState({
+									...this.state,
+									showModalAdd: true,
+								});
+							}}
+						>
+							Thêm món ăn
+						</Button>
+					</Row>
         </Container>
       );
     }
