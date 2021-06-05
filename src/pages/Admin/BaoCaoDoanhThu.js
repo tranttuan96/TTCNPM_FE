@@ -324,34 +324,42 @@ export default class MyComponent extends React.Component {
               }}
             />
           </Row>
-          <Row>
-            <Col>
-              <Button
-                variant="outline-warning"
-                className="mt-5 mb-3"
-								size="lg"
-								style={{width: "100%",}}
-                onClick={(e) => {
-                  e.preventDefault();
-                  this.fetchJSON(`${domain}/revenues/auto?status=true`).catch(
-                    (e) => {
-                      console.log(e);
-                      this.setState({
-                        ...this.state,
-                        isLoaded: true,
-                        error: e,
-                      });
-                    }
-                  );
 
-									alert("Auto");
-                }}
-              >
-                Auto
-              </Button>
+          <Row className="mt-5">
+            <Col>
+							<div style={{ border: "3px solid red", padding: "10px" }}>
+								<p>
+									Vào ngày cuối mỗi tháng, hệ thống sẽ tự động lấy tất cả đơn hàng trong tháng đó để tính toán doanh thu, lưu trữ lại trong cơ sở dữ liệu và gửi email có chứa hình ảnh biểu đồ doanh thu (12 tháng gần nhất, gồm tháng vừa tính) cho người quản lý.
+									<br></br>
+									Để demo thì nhóm thiết kế một cái nút "Gửi email" như dưới đây, sau khi bấm nút này thì hệ thống sẽ xem như đã đến cuối tháng và hoạt động như đã mô tả ở trên.
+								</p>
+								<Button
+									variant="outline-warning"
+									size="lg"
+									style={{width: "100%",}}
+									onClick={(e) => {
+										e.preventDefault();
+										this.fetchJSON(`${domain}/revenues/sendEmail`).catch(
+											(e) => {
+												console.log(e);
+												this.setState({
+													...this.state,
+													isLoaded: true,
+													error: e,
+												});
+											}
+										);
+
+										alert("Đã gửi email!");
+									}}
+								>
+									Gửi email
+								</Button>
+							</div>
             </Col>
           </Row>
-          <Row>
+
+          {/* <Row>
             <Col>
               <Button
                 variant="outline-secondary"
@@ -376,7 +384,7 @@ export default class MyComponent extends React.Component {
                 Stop
               </Button>
             </Col>
-          </Row>
+          </Row> */}
         </Container>
       );
     }

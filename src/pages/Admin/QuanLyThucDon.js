@@ -343,7 +343,8 @@ export default class MyComponent extends React.Component {
                 <Form.Group controlId="dishPrice2" className="my-3">
                   <Form.Label>Giá tiền món ăn</Form.Label>
                   <Form.Control
-                    type="text"
+                    type="number"
+										step="1000"
                     defaultValue={this.state.currentDish.price}
                     required
                     onChange={(e) => {
