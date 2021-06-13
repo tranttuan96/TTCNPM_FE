@@ -28,6 +28,20 @@ export class quanLyDonHangService {
             data: transactionInfo
         })
     };
+
+    layDonHang = () => {
+        return axios({
+            url:`${domain}/order`,
+            method:'GET'
+        })
+    };
+    capNhatDaNau = (orderID) => {
+        return axios({
+            url:`${domain}/order/${orderID}/cookDone`,
+            method:'PUT'
+        })
+    };
+
 }
 
 export const qlDonHangService = new quanLyDonHangService();
