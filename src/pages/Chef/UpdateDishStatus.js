@@ -131,7 +131,7 @@ export default class MyComponent extends React.Component {
 
   componentDidMount() {
     this.intervalId = setInterval(() => {
-      this.fetchJSON("http://localhost:8090/dish")
+      this.fetchJSON("http://localhost:8080/dish")
         .then((data) => {
           this.setState({
             ...this.state,
