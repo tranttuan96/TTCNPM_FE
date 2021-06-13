@@ -52,7 +52,7 @@ export default function Dish(props) {
                     <div className="wrapper">
                         <p className="card-text"><CurrencyFormat value={dish.price} displayType={'text'} thousandSeparator={true} suffix={'đ'} /></p>
                         <div className="selectGroupBtn">
-                            {dish.status == "available" ? renderOrderBtn() : <button href="#" className="btn btn-secondary" disabled>Go somewhere</button>}
+                            {dish.status == "available" ? renderOrderBtn() : <button className="btn btn-secondary" disabled>Hết món</button>}
                         </div>
                     </div>
                 </div>

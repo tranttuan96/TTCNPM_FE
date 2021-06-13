@@ -16,7 +16,7 @@ export default function Homepage() {
         qlMonAnService.layDanhSachMonAn().then(res => {
             setDanhSachMonAn(res.data);
         }).catch(error => {
-            console.log(error.response.data);
+            console.log(error.response);
         });
     }, []);
 
