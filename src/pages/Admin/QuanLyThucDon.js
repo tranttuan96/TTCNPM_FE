@@ -63,9 +63,9 @@ export default class MyComponent extends React.Component {
 		if (!response.ok) {
 			// throw new Error(`HTTP error! status: ${response.status}`);
 			if (response.status == 400) {
-				alert("Your file is too large!");
+				alert("Kích cỡ tập tin bạn tải lên quá lớn (> 5MB)!");
 			} else {
-				alert("Something wrong!");
+				alert("Có lỗi hệ thống!");
 			}
 		} else {
 
@@ -96,11 +96,11 @@ export default class MyComponent extends React.Component {
 		if (!response.ok) {
 			// throw new Error(`HTTP error! status: ${response.status}`);
 			if (response.status == 400) {
-				alert("Your file is too large!");
+				alert("Kích cỡ tập tin bạn tải lên quá lớn (> 5MB)!");
 			} else if (response.status == 410) {
-				alert("This dish doesn't exist!");
+				alert("Món ăn này không tồn tại!");
 			} else {
-				alert("Something wrong!");
+				alert("Có lỗi hệ thống!");
 			}
 		} else {
 
@@ -131,9 +131,9 @@ export default class MyComponent extends React.Component {
 		if (!response.ok) {
 			// throw new Error(`HTTP error! status: ${response.status}`);
 			if (response.status == 410) {
-				alert("This dish doesn't exist!");
+				alert("Món ăn này không tồn tại!");
 			} else {
-				alert("Something wrong!");
+				alert("Có lỗi hệ thống!");
 			}
 		} else {
 
@@ -556,7 +556,7 @@ export default class MyComponent extends React.Component {
 											`${domain}/dish/${this.state.currentDish._links.self.href.split("/")[5]}`
 										);
 
-										this.setState({ ...this.state, showModalDelete: false });
+										this.setState({ ...this.state, showModalDelete: false, currentPage: 0 });
 									}}
 								>
 									Chắc chắn

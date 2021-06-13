@@ -61,14 +61,20 @@ export default class MyComponent extends React.Component {
 		});
 
 		if (!response.ok) {
-			throw new Error(`HTTP error! status: ${response.status}`);
+			// throw new Error(`HTTP error! status: ${response.status}`);
+			if (response.status == 400) {
+				alert("Kích cỡ tập tin bạn tải lên quá lớn (> 5MB)!");
+			} else {
+				alert("Có lỗi hệ thống!");
+			}
+		} else {
+
+			const response2 = await response.json(); // parses JSON response into native JavaScript objects
+
+			alert("Thêm món ăn thành công!");
+
+			return response2;
 		}
-
-		const response2 = await response.json(); // parses JSON response into native JavaScript objects
-
-		alert("Thêm món ăn thành công!");
-
-		return response2;
 	}
 
 	async putData(url = "", formData) {
@@ -88,14 +94,22 @@ export default class MyComponent extends React.Component {
 		});
 
 		if (!response.ok) {
-			throw new Error(`HTTP error! status: ${response.status}`);
+			// throw new Error(`HTTP error! status: ${response.status}`);
+			if (response.status == 400) {
+				alert("Kích cỡ tập tin bạn tải lên quá lớn (> 5MB)!");
+			} else if (response.status == 410) {
+				alert("Món ăn này không tồn tại!");
+			} else {
+				alert("Có lỗi hệ thống!");
+			}
+		} else {
+
+			const response2 = await response.json(); // parses JSON response into native JavaScript objects
+
+			alert("Cập nhật món ăn thành công!");
+
+			return response2;
 		}
-
-		const response2 = await response.json(); // parses JSON response into native JavaScript objects
-
-		alert("Cập nhật món ăn thành công!");
-
-		return response2;
 	}
 
 	async deleteData(url = "") {
@@ -115,14 +129,20 @@ export default class MyComponent extends React.Component {
 		});
 
 		if (!response.ok) {
-			throw new Error(`HTTP error! status: ${response.status}`);
+			// throw new Error(`HTTP error! status: ${response.status}`);
+			if (response.status == 410) {
+				alert("Món ăn này không tồn tại!");
+			} else {
+				alert("Có lỗi hệ thống!");
+			}
+		} else {
+
+			// const response2 = await response.json(); // parses JSON response into native JavaScript objects
+
+			alert("Xoá món ăn thành công!");
+
+			return response;
 		}
-
-		const response2 = await response.json(); // parses JSON response into native JavaScript objects
-
-		alert("Xoá món ăn thành công!");
-
-		return response2;
 	}
 
 	// function for checking price
@@ -536,7 +556,7 @@ export default class MyComponent extends React.Component {
 											`${domain}/dish/${this.state.currentDish._links.self.href.split("/")[5]}`
 										);
 
-										this.setState({ ...this.state, showModalDelete: false });
+										this.setState({ ...this.state, showModalDelete: false, currentPage: 0 });
 									}}
 								>
 									Chắc chắn
