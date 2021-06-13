@@ -21,7 +21,7 @@ export class quanLyMonAnService {
     };
     capNhatConMon = (keyword) => {
         return axios({
-            url:`${domain}/dish/${keyword}/available`,
+            url:`${domain}/dish/${keyword}/avaiable`,
             method:'PUT'
         })
     };

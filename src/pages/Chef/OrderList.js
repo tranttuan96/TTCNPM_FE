@@ -13,12 +13,12 @@ const useStyles = makeStyles((theme) => ({
   }));
 export default function OrderList(props) {  
   // const {ordersList: {isLoading, errMess, display}} = props;
-    let {layDonHang, selectOrder ,gioHang} = props;
+    let {layDonHang, selectOrder, confirmOrder ,gioHang} = props;
     const classes = useStyles();
     const renderOrderList = () => {
             return layDonHang.map((order, index) => {
                 if(order.orderStatus === "paid") {
-                    return <Order key={index} order={order} selectOrder={selectOrder}></Order>
+                    return <Order key={index} order={order} selectOrder={selectOrder} confirmOrder={confirmOrder}  ></Order>
                 } 
             }) 
     }

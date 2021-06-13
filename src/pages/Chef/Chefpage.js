@@ -7,6 +7,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import CurrencyFormat from "react-currency-format";
+import swal from 'sweetalert';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -21,11 +22,13 @@ export default function Chefpage() {
 
     const classes = useStyles();
       
-
    function say() {
     qlDonHangService.capNhatDaNau(curOrder.orderID).then(res => {
-        console.log(res.data);
-        setCurOrder(res.data);
+        swal("Success!", "Cập nhật thành công", "success", {
+            buttons: false,
+            timer: 1000,
+        });   
+        setCurOrder({});
         let danhSachReduce = layDonHang.reduce((mangOrder, order, index) => {
             console.log(order)
             if(order.orderID !== res.data.orderID) {
@@ -165,7 +168,7 @@ export default function Chefpage() {
                <Grid item xs={12}><Paper className={classes.paper} elevation={0}><b><h5>NEW ORDERS</h5></b></Paper></Grid>
                    <div className="one_order">
 
-                  <OrderList layDonHang={layDonHang} selectOrder={selectOrder}/>  
+                  <OrderList layDonHang={layDonHang} selectOrder={selectOrder} confirmOrder={say}/>  
                    </div>
 
                </div>
