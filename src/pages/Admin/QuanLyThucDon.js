@@ -231,9 +231,9 @@ export default class MyComponent extends React.Component {
 										let name = this.state.formData.get("name");
 										let price = this.state.formData.get("price");
 										if (name.length < 5 || name.length > 40) {
-											alert("Name must be between 5 and 40 characters!");
-										} else if (!this.isNumeric(price) || (price < 1000 || price > 20000000)) {
-											alert("Price must be between 1,000 and 20,000,000 dong!");
+											alert("Tên món ăn phải từ 5 đến 40 kí tự!");
+										} else if (!this.isNumeric(price) || (parseInt(price) < 1000 || parseInt(price) > 20_000_000)) {
+											alert("Giá tiền món ăn phải là số nguyên và từ 1,000 đến 20,000,000 đồng!");
 										} else {
 											let newFormData = this.state.formData;
 											newFormData.set("price", parseInt(this.state.formData.get("price")));
@@ -269,8 +269,7 @@ export default class MyComponent extends React.Component {
 									<Form.Group controlId="dishPrice" className="my-3">
 										<Form.Label>Giá tiền món ăn</Form.Label>
 										<Form.Control
-											type="number"
-											step="1000"
+											type="text"
 											required
 											onChange={(e) => {
 												e.preventDefault();
@@ -352,9 +351,9 @@ export default class MyComponent extends React.Component {
 										let name = this.state.formData.get("name");
 										let price = this.state.formData.get("price");
 										if (name.length < 5 || name.length > 40) {
-											alert("Name must be between 5 and 40 characters!");
-										} else if (!this.isNumeric(price) || (price < 1000 || price > 20000000)) {
-											alert("Price must be between 1,000 and 20,000,000 dong!");
+											alert("Tên món ăn phải từ 5 đến 40 kí tự!");
+										} else if (!this.isNumeric(price) || (parseInt(price) < 1000 || parseInt(price) > 20_000_000)) {
+											alert("Giá tiền món ăn phải là số nguyên và từ 1,000 đến 20,000,000 đồng!");
 										} else {
 											let newFormData = this.state.formData;
 											newFormData.set("price", parseInt(this.state.formData.get("price")));
@@ -390,8 +389,7 @@ export default class MyComponent extends React.Component {
 									<Form.Group controlId="dishPrice" className="my-3">
 										<Form.Label>Giá tiền món ăn</Form.Label>
 										<Form.Control
-											type="number"
-											step="1000"
+											type="text"
 											required
 											onChange={(e) => {
 												e.preventDefault();
@@ -452,9 +450,9 @@ export default class MyComponent extends React.Component {
 										let name = this.state.formData.get("name");
 										let price = this.state.formData.get("price");
 										if (name.length < 5 || name.length > 40) {
-											alert("Name must be between 5 and 40 characters!");
-										} else if (!this.isNumeric(price) || (price < 1000 || price > 20000000)) {
-											alert("Price must be between 1,000 and 20,000,000 dong!");
+											alert("Tên món ăn phải từ 5 đến 40 kí tự!");
+										} else if (!this.isNumeric(price) || (parseInt(price) < 1000 || parseInt(price) > 20_000_000)) {
+											alert("Giá tiền món ăn phải là số nguyên và từ 1,000 đến 20,000,000 đồng!");
 										} else {
 											let newFormData = this.state.formData;
 											newFormData.set("price", parseInt(this.state.formData.get("price")));
@@ -491,8 +489,7 @@ export default class MyComponent extends React.Component {
 									<Form.Group controlId="dishPrice2" className="my-3">
 										<Form.Label>Giá tiền món ăn</Form.Label>
 										<Form.Control
-											type="number"
-											step="1000"
+											type="text"
 											defaultValue={this.state.currentDish.price}
 											required
 											onChange={(e) => {
