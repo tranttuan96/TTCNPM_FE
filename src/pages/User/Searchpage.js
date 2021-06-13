@@ -36,11 +36,20 @@ export default function Searchpage(props) {
         </div>
     }
 
-    return (
-        <div className="searchPage">
+    const renderContent = () => {
+        if(danhSachMonAn.length === 0) {
+            return <h3 className="text-center py-2">Không có kết quả phù hợp.</h3>
+        }
+        else return <div>
             <h3 className="menu_title">Kết quả tìm kiếm</h3>
             <ListDish danhSachMonAn={danhSachMonAn} gioHang={thongTinGioHang.gioHang}></ListDish>
             {thongTinGioHang.totalQuantity > 0 ? renderCartInfo() : <div></div>}
+        </div>
+    }
+
+    return (
+        <div className="searchPage">
+            {renderContent()}
         </div>
     )
 }

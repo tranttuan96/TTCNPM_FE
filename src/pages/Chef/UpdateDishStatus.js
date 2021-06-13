@@ -1,254 +1,267 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import List from '@material-ui/core/List';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import Checkbox from '@material-ui/core/Checkbox';
-import Button from '@material-ui/core/Button';
-import Divider from '@material-ui/core/Divider';
+import React,{useState, useEffect} from "react";
+import {
+  Container,
+  Table,
+  Button,
+  Modal,
+  Form,
+  Image,
+  Card,
+} from "react-bootstrap";
+import Switch from '@material-ui/core/Switch';
+import { domain } from "../../setting/config";
+// npm install react-bootstrap bootstrap
+import { qlMonAnService } from "../../services/quanLyMonAnService.js"
 
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    margin: 'auto',
-  },
-  cardHeader: {
-    padding: theme.spacing(1, 2),
-  },
-  list: {
-    width: 500,
-    height: 400,
-  //  backgroundColor: theme.palette.background.paper,
-    overflow: 'scroll',
-  },
-  button: {
-    margin: theme.spacing(2, 0),
-  },
-}));
+// export default function UpdateDishStatus(props) {
+//   let { order, selectOrder, orderStt } = props;
+// //   const selectOrder = (order) => {
+// //     console.log(order)
+// // }
+//   const [layMonAn, setMonAn] = useState([]);
+//   const [curDish, setcurDish] = useState({});
+//   const [danhSachMonAn, setDanhSachMonAn] = useState([]);
 
-function not(a, b) {
-  return a.filter((value) => b.indexOf(value) === -1);
-}
+//   useEffect(() => {
+//       //Gọi service Api set lại state danhSachMonAn
+//       qlMonAnService.layDanhSachMonAn().then(res => {
+//           setDanhSachMonAn(res.data);
+//       }).catch(error => {
+//           console.log(error.response.data);
+//       });
+//   }, []);
+  
+//   function say() {
+//     qlMonAnService.capNhatHetMon(curDish.id).then(res => {
+//         console.log(res.data);
+//         setcurDish(res.data);
+//     }).catch(error => {
+//         console.log(error.response);
+//     });
+//     }
 
-function intersection(a, b) {
-  return a.filter((value) => b.indexOf(value) !== -1);
-}
-
-function union(a, b) {
-  return [...a, ...not(b, a)];
-}
-// function dishSst (props) {
-//     let {dishes, status} = props;
-//     const renderListDish = () => {
-        
-//         return dishes.map((dish, index) => {
-//             let findIndex = status.findIndex(dish.status == 0);
-//             if (findIndex == 1) {
-//                 return <Dish key={index} dish={dish} dishQuantity={gioHang[findIndex].quantity}></Dish>
-//             }
-//         })
-    
+//   return (
+//         <Container className="my-5">
+//           {/* tableDish */}
+//           <Table striped bordered hover>
+//             <thead>
+//               <tr>
+//                 <th>INDEX</th>
+//                 <th>IMAGE</th>
+//                 <th>NAME</th>
+//                 <th>ACTION</th>
+//               </tr>
+//             </thead>
+//             <tbody>
+//               {order.map((dish) => (
+//                 <tr>
+//                   <td>{dish.id}</td>
+//                   <td>
+//                     <Card style={{ width: "10rem", height: "10rem" }}>
+//                       <Card.Img variant="top" src={`${domain}/${dish.photo}`} />
+//                     </Card>
+//                   </td>
+//                   <td>{dish.name}</td>
+//                   <td>
+//                     <Button
+//                       className="me-3"
+//                       variant="primary"
+//                       onClick={say}
+//                     >
+//                       Cập nhật
+//                     </Button>
+//                   </td>
+//                 </tr>
+//               ))}
+//             </tbody>
+//           </Table>
+//         </Container>
+//   )
 // }
 
-// }
 
+export default class MyComponent extends React.Component {
+  interval = null;
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      error: null,
+      isLoaded: false,
+      dishes: [],
+      currentDish: {},
+      photoUrl: "",
+      formData: new FormData(),
+    };
 
-export default function TransferList() {
-  const classes = useStyles();
-  const [checked, setChecked] = React.useState([]);
-  const [left, setLeft] = React.useState([0, 1, 2, 3]);
-  const [right, setRight] = React.useState([4, 5, 6, 7,25]);
+  }
 
-  const leftChecked = intersection(checked, left);
-  const rightChecked = intersection(checked, right);
+  async fetchJSON(url) {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data;
+  }
 
-  const handleToggle = (value) => () => {
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
+  async postData(url = "", formData) {
+    // Default options are marked with *
+    const response = await fetch(url, {
+      method: "POST", // *GET, POST, PUT, DELETE, etc.
+      mode: "cors", // no-cors, *cors, same-origin
+      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+      credentials: "same-origin", // include, *same-origin, omit
+      // headers: {
+      // "Content-Type": "application/json",
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+      // },
+      redirect: "follow", // manual, *follow, error
+      referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+      body: formData, // body data type must match "Content-Type" header
+    });
 
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {
-      newChecked.splice(currentIndex, 1);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    setChecked(newChecked);
-  };
+    const response2 = await response.json(); // parses JSON response into native JavaScript objects
 
-  const numberOfChecked = (items) => intersection(checked, items).length;
+    alert("Thêm món ăn thành công!");
 
-  const handleToggleAll = (items) => () => {
-    if (numberOfChecked(items) === items.length) {
-      setChecked(not(checked, items));
-    } else {
-      setChecked(union(checked, items));
+    return response2;
+  }
+
+  async putData(url = "", formData) {
+    // Default options are marked with *
+    const response = await fetch(url, {
+      method: "PUT", // *GET, POST, PUT, DELETE, etc.
+      mode: "cors", // no-cors, *cors, same-origin
+      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+      credentials: "same-origin", // include, *same-origin, omit
+      redirect: "follow", // manual, *follow, error
+      referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+      body: formData, // body data type must match "Content-Type" header
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
-  };
 
-  const handleCheckedRight = () => {
-    setRight(right.concat(leftChecked));
-    setLeft(not(left, leftChecked));
-    setChecked(not(checked, leftChecked));
-  };
+    const response2 = await response.json(); // parses JSON response into native JavaScript objects
 
-  const handleCheckedLeft = () => {
-    setLeft(left.concat(rightChecked));
-    setRight(not(right, rightChecked));
-    setChecked(not(checked, rightChecked));
-  };
+    alert("Cập nhật món ăn thành công!");
 
-  const customList = (title, items) => (
-    <Card>
-      <CardHeader
-        className={classes.cardHeader}
-        avatar={
-          <Checkbox
-            onClick={handleToggleAll(items)}
-            checked={numberOfChecked(items) === items.length && items.length !== 0}
-            indeterminate={numberOfChecked(items) !== items.length && numberOfChecked(items) !== 0}
-            disabled={items.length === 0}
-            inputProps={{ 'aria-label': 'all items selected' }}
-          />
-        }
-        title={title}
-        subheader={`${numberOfChecked(items)}/${items.length} selected`}
-      />
-      <Divider />
-      <List className={classes.list} dense component="div" role="list">
-        {items.map((value) => {
-          const labelId = `transfer-list-all-item-${value}-label`;
+    return response2;
+  }
 
-          return (
-            <ListItem key={value} role="listitem" button onClick={handleToggle(value)}>
-              <ListItemIcon>
-                <Checkbox
-                  checked={checked.indexOf(value) !== -1}
-                  tabIndex={-1}
-                  disableRipple
-                  inputProps={{ 'aria-labelledby': labelId }}
-                />
-              </ListItemIcon>
-              <ListItemText id={labelId} primary={`Food ${value + 1}`} />
-            </ListItem>
-          );
-        })}
-        <ListItem />
-      </List>
-    </Card>
-  );
+  componentDidMount() {
+    this.intervalId = setInterval(() => {
+      this.fetchJSON("http://localhost:8090/dish")
+        .then((data) => {
+          this.setState({
+            ...this.state,
+            isLoaded: true,
+            dishes: data,
+          });
+        })
+        .catch((e) => {
+          console.log(e);
+          this.setState({
+            ...this.state,
+            isLoaded: true,
+            error: e,
+            // e,
+          });
+        });
+    }, 2000);
+  }
 
-  return (
-    <Grid container spacing={2} justify="center" alignItems="center" className={classes.root}>
-      <Grid item>{customList('Available', left)}</Grid>
-      <Grid item>
-        <Grid container direction="column" alignItems="center">
-          <Button
-            variant="outlined"
-            size="small"
-            className={classes.button}
-            onClick={handleCheckedRight}
-            disabled={leftChecked.length === 0}
-            aria-label="move selected right"
-          >
-            &gt;
-          </Button>
-          <Button
-            variant="outlined"
-            size="small"
-            className={classes.button}
-            onClick={handleCheckedLeft}
-            disabled={rightChecked.length === 0}
-            aria-label="move selected left"
-          >
-            &lt;
-          </Button>
-        </Grid>
-      </Grid>
-      <Grid item>{customList('Unavailable', right)}</Grid>
-    </Grid>
-  );
+  componentWillUnmount() {
+    clearInterval(this.interval);
+    this.interval = null;
+  }
+
+  render() {
+    const { error, isLoaded, dishes } = this.state;
+
+    console.log(dishes);
+
+    if (error) {
+      return <div>Error: {error.message}</div>;
+    } else if (!isLoaded) {
+      return <div>Loading...</div>;
+    } else {
+      console.log(this.state);
+      console.log("dish id: " + this.state.currentDish.id);
+      console.log("formData name: " + this.state.formData.get("name"));
+      console.log("formData price: " + this.state.formData.get("price"));
+      console.log("formData photo: " + this.state.formData.get("photo"));
+      console.log("photoUrl: " + this.state.photoUrl);
+
+      let count = 1;
+
+      return (
+        <Container className="my-5">
+          {/* tableDish */}
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>INDEX</th>
+                <th>IMAGE</th>
+                <th>NAME</th>
+                <th>STATUS</th>
+                <th>ACTION</th>
+              </tr>
+            </thead>
+            <tbody>
+              {dishes.map((dish) => (
+                <tr key={dish.id}>
+                  <td>{count++}</td>
+                  <td>
+                    <Card style={{ width: "10rem", height: "10rem" }}>
+                      <Card.Img variant="top" src={`${domain}/${dish.photo}`} />
+                    </Card>
+                  </td>
+                  <td>{dish.name}</td>
+                  <td > <p class="text-uppercase">{dish.status}</p></td>
+                  <td>
+                  <Button
+											className="me-3"
+											variant="primary"
+											onClick={() => {
+                        qlMonAnService.capNhatHetMon(dish.id).then(res => {
+                                   console.log(res.data);
+                               }).catch(error => {
+                                   console.log(error.response);
+                               });
+											}
+                    }
+										>
+											 Unavailable
+										</Button>	
+                    <Button
+											className="me-3"
+											variant="success"
+											onClick={() => {
+                        qlMonAnService.capNhatConMon(dish.id).then(res => {
+                                   console.log(res.data);
+                               }).catch(error => {
+                                   console.log(error.response);
+                               });
+											}
+                    }
+										>
+											Available
+										</Button>						
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </Container>
+      );
+    }
+  }
 }
-
-
-// import Container from 'react-bootstrap/Container'
-// import React, { useState, useEffect } from 'react'
-// import Row from 'react-bootstrap/Row'
-// import Col from 'react-bootstrap/Col'
-// import ListGroup from 'react-bootstrap/ListGroup'
-// import Button from 'react-bootstrap/Button'
-
-// export default function UpdateDishStt() {
-
-//         function say() {
-//             alert('Check!');
-//           }
-
-//         return (
-            
-//             <section className ="container">
-                
-//                 <Container fluid="md" >
-                    
-//                     <Row  >
-//                         <Col md = {4}>
-//                         <Row >
-//                             Available
-//                         </Row>
-//                         <Divider />
-//                         <ListGroup  key={value} role="tab" button onClick={handleToggle(value)} >
-//                             <ListGroup.Item action href="#link1">
-//                             Link 1
-//                             </ListGroup.Item>
-//                             <ListGroup.Item action href="#link2">
-//                             Link 2
-//                             </ListGroup.Item>
-//                         </ListGroup>
-
-//                         </Col>
-//                         <Col xs={2} >
-//                             <Button
-//                                 variant="outline-success"
-//                                 size="md"
-                                
-//                                // className={classes.button}
-//                               //  onClick={handleCheckedLeft}
-//                                // disabled={rightChecked.length === 0}
-//                                 aria-label="move selected left"
-//                             >
-//                                 &lt;
-//                             </Button>
-//                             <Button
-//                                 variant="outline-success"
-//                                 size="md"
-                                
-//                                // className={classes.button}
-//                               //  onClick={handleCheckedLeft}
-//                                // disabled={rightChecked.length === 0}
-//                                 aria-label="move selected right"
-//                             >
-//                                 &gt;
-//                             </Button>
-//                         </Col>
-//                         <Col md = {4}>
-//                         <Row>
-//                             Unavailabile
-//                         </Row>
-//                         <ListGroup>
-//                         <ListGroup.Item action href="#link1">
-//                             Link 1
-//                             </ListGroup.Item>
-//                             <ListGroup.Item action href="#link2">
-//                             Link 2
-//                             </ListGroup.Item>
-//                         </ListGroup>
-//                         </Col>
-//                     </Row>
-//                 </Container>
-//             </section>   
-//         )
-//      }
