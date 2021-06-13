@@ -219,7 +219,7 @@ export default class MyComponent extends React.Component {
 						{/* modalAdd */}
 						<Modal
 							show={this.state.showModalAdd}
-							onHide={() => this.setState({ ...this.state, showModalAdd: false })}
+							onHide={() => this.setState({ ...this.state, showModalAdd: false, formData: new FormData() })}
 						>
 							<Modal.Header closeButton>
 								<Modal.Title>Thêm món ăn</Modal.Title>
@@ -245,7 +245,7 @@ export default class MyComponent extends React.Component {
 												`${domain}/dish`,
 												this.state.formData
 											);
-											this.setState({ ...this.state, showModalAdd: false });
+											this.setState({ ...this.state, showModalAdd: false, formData: new FormData() });
 										}
 									}}
 								>
@@ -305,7 +305,7 @@ export default class MyComponent extends React.Component {
 							<Modal.Footer>
 								<Button
 									onClick={() =>
-										this.setState({ ...this.state, showModalAdd: false })
+										this.setState({ ...this.state, showModalAdd: false, formData: new FormData() })
 									}
 								>
 									Huỷ
@@ -339,7 +339,7 @@ export default class MyComponent extends React.Component {
 						{/* modalAdd */}
 						<Modal
 							show={this.state.showModalAdd}
-							onHide={() => this.setState({ ...this.state, showModalAdd: false })}
+							onHide={() => this.setState({ ...this.state, showModalAdd: false, formData: new FormData() })}
 						>
 							<Modal.Header closeButton>
 								<Modal.Title>Thêm món ăn</Modal.Title>
@@ -365,7 +365,7 @@ export default class MyComponent extends React.Component {
 												`${domain}/dish`,
 												this.state.formData
 											);
-											this.setState({ ...this.state, showModalAdd: false });
+											this.setState({ ...this.state, showModalAdd: false, formData: new FormData() });
 										}
 									}}
 								>
@@ -425,7 +425,7 @@ export default class MyComponent extends React.Component {
 							<Modal.Footer>
 								<Button
 									onClick={() =>
-										this.setState({ ...this.state, showModalAdd: false })
+										this.setState({ ...this.state, showModalAdd: false, formData: new FormData() })
 									}
 								>
 									Huỷ
@@ -437,7 +437,7 @@ export default class MyComponent extends React.Component {
 						<Modal
 							show={this.state.showModalUpdate}
 							onHide={() =>
-								this.setState({ ...this.state, showModalUpdate: false })
+								this.setState({ ...this.state, showModalUpdate: false, formData: new FormData() })
 							}
 						>
 							<Modal.Header closeButton>
@@ -464,7 +464,7 @@ export default class MyComponent extends React.Component {
 												`${domain}/dish/${this.state.currentDish._links.self.href.split("/")[5]}`,
 												this.state.formData
 											);
-											this.setState({ ...this.state, showModalUpdate: false });
+											this.setState({ ...this.state, showModalUpdate: false, formData: new FormData() });
 										}
 									}}
 								>
@@ -514,7 +514,7 @@ export default class MyComponent extends React.Component {
 												className="my-3"
 											/>
 											<br></br>
-											<Form.File.Input required onChange={this.onImageChange} />
+											<Form.File.Input onChange={this.onImageChange} />
 										</Form.File>
 									</Form.Group>
 
@@ -526,7 +526,7 @@ export default class MyComponent extends React.Component {
 							<Modal.Footer>
 								<Button
 									onClick={() =>
-										this.setState({ ...this.state, showModalUpdate: false })
+										this.setState({ ...this.state, showModalUpdate: false, formData: new FormData() })
 									}
 								>
 									Huỷ
@@ -538,7 +538,7 @@ export default class MyComponent extends React.Component {
 						<Modal
 							show={this.state.showModalDelete}
 							onHide={() =>
-								this.setState({ ...this.state, showModalDelete: false })
+								this.setState({ ...this.state, showModalDelete: false, formData: new FormData() })
 							}
 						>
 							<Modal.Header closeButton>
@@ -553,7 +553,7 @@ export default class MyComponent extends React.Component {
 											`${domain}/dish/${this.state.currentDish._links.self.href.split("/")[5]}`
 										);
 
-										this.setState({ ...this.state, showModalDelete: false, currentPage: 0 });
+										this.setState({ ...this.state, showModalDelete: false, currentPage: 0, formData: new FormData() });
 									}}
 								>
 									Chắc chắn
@@ -561,7 +561,7 @@ export default class MyComponent extends React.Component {
 								<Button
 									onClick={(e) => {
 										e.preventDefault();
-										this.setState({ ...this.state, showModalDelete: false });
+										this.setState({ ...this.state, showModalDelete: false, formData: new FormData() });
 									}}
 								>
 									Không
