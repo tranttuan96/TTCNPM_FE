@@ -1,11 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import { Divider } from '@material-ui/core';
 import Modal from 'react-bootstrap/Modal'
-
+import { qlDonHangService } from "../../services/quanLyDonHangService.js"
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -34,13 +33,72 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 export default function Order(props) {
+    
+
+    // const classes = useStyles();
+    // function say() {
+    //  qlDonHangService.capNhatDaNau(curOrder.orderID).then(res => {
+    //      console.log(res.data);
+    //      setCurOrder(res.data);
+    //      let danhSachReduce = layDonHang.reduce((mangOrder, order, index) => {
+    //          console.log(order)
+    //          if(order.orderID !== res.data.orderID) {
+    //              mangOrder.push(order);
+    //          }
+    //          return mangOrder;
+    //      }, []);
+    //      console.log(danhSachReduce)
+    //      setDanhSachDon(danhSachReduce);
+    //  }).catch(error => {
+    //      console.log(error.response);
+    //  });
+    //  }
+    
+    //   const [layDonHang, setDanhSachDon] = useState([]);
+    //   const [curOrder, setCurOrder] = useState({});
+ 
+    //  useEffect(() => {
+    //      //Gọi service Api set lại state danhSachMonAn
+    //      if(layDonHang.length === 0) {
+    //          qlDonHangService.layDonHang().then(res => {
+    //              setDanhSachDon(res.data);
+    //              // console.log(res.data);
+    //          }).catch(error => {
+    //              console.log(error.response);
+    //          });
+    //      }
+    //      else {
+    //          setTimeout(() => {
+    //              qlDonHangService.layDonHang().then(res => {
+    //                  setDanhSachDon(res.data);
+    //                  // console.log(res.data);
+    //              }).catch(error => {
+    //                  console.log(error.response);
+    //              });
+    //          }, 60000);
+    //      }
+    //  });
+ 
+    //  const selectOrder = (order) => {
+    //      // console.log(order)
+    //      setCurOrder(order);
+    //  }
+    let { order, selectOrder, confirmOrder, orderStt } = props;
+
     const [show, setShow] = useState(false);
 
-    const handleClose = () => setShow(false);
+    const handleClose = () => {
+        setShow(false);
+    }
+
+    const handleSubmit = () => {
+        setShow(false);
+        confirmOrder();
+    }
+    
     const handleShow = () => setShow(true);
 
-    let { order, selectOrder, orderStt } = props;
-    const classes = useStyles();
+     const classes = useStyles();
     return (
         <section>
     <Paper variant="outlined" square  onClick={() => {selectOrder(order)}}>
@@ -77,7 +135,7 @@ export default function Order(props) {
                           <Button variant="secondary" onClick={handleClose}>
                           Close
                           </Button>
-                          <Button variant="contained" size="small" color="primary" onClick={() => {selectOrder(order)}}>Confirm</Button>
+                          <Button variant="contained" size="small" color="primary" onClick={handleSubmit}>Confirm</Button>
                       </Modal.Footer>
                       </Modal>
     </section>
