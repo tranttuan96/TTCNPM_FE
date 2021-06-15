@@ -116,5 +116,17 @@
   align-items: center;
   .wrapper {
     text-align: center;
+    .notification {
+      color: green;
+      font-size: 40px;
+      font-weight: 600;
+    }
+    .orderID {
+      font-size: 25px;
+      margin-bottom: 20px;
+    }
+    a {
+      font-size: 25px;
+    }
   }
 }

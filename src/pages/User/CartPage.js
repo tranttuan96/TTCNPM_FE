@@ -40,7 +40,7 @@ export default function CartPage() {
     const renderOrderConfirmed = () => {
         return <div className="orderConfirmed">
             <div className="wrapper">
-                <div className="notification">Đặt hàng thành công.</div>
+                <div className="notification">Đặt hàng thành công</div>
                 <div className="orderID">Mã đơn hàng: {orderInfo.orderID}</div>
                 <NavLink to={`/checkout/${orderInfo.orderID}`} className="btn btn-primary">Tiến hành thanh toán</NavLink>
             </div>
