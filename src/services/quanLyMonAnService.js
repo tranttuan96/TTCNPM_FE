@@ -13,6 +13,19 @@ export class quanLyMonAnService {
             method:'GET'
         })
     }
+    capNhatHetMon = (keyword) => {
+        return axios({
+            url:`${domain}/dish/${keyword}/unavaiable`,
+            method:'PUT'
+        })
+    };
+    capNhatConMon = (keyword) => {
+        return axios({
+            url:`${domain}/dish/${keyword}/avaiable`,
+            method:'PUT'
+        })
+    };
 }
+
 
 export const qlMonAnService = new quanLyMonAnService();

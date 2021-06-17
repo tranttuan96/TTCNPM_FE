@@ -1,121 +1,179 @@
 import React, {useState, useEffect} from 'react'
-import Card from 'react-bootstrap/Card'
-import Button from 'react-bootstrap/Button'
+import Button from '@material-ui/core/Button';
 import "./Chefstyle.scss"
-// import { NavLink } from "react-router-dom"
-import Modal from 'react-bootstrap/Modal'
+import OrderList from './OrderList';
+import { qlDonHangService } from "../../services/quanLyDonHangService.js"
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles';
+import CurrencyFormat from "react-currency-format";
+import swal from 'sweetalert';
 
-
+const useStyles = makeStyles((theme) => ({
+    root: {
+      flexGrow: 1,
+    },
+    paper: {
+       padding: theme.spacing(1),
+      textAlign: 'center',
+    },
+  }));
 export default function Chefpage() {
 
-   // const orderList = (dish) => {
-      //  let orderItem = {
-           // id: orderItems.order_id,
-          //  name:dish.name,
-           // price:orderItems.price,
-           // quantity:orderItems.quantity,
-           // status: orderItems.status,
-   //     }
-      //  dispatch(showList(orderItem))
-  //  }
-   // const dispatch = useDispatch();
-   // let { order, setOder } = props;
-
+    const classes = useStyles();
+      
    function say() {
-       alert('Check!');
-     }
+    qlDonHangService.capNhatDaNau(curOrder.orderID).then(res => {
+        swal("Success!", "Cập nhật thành công", "success", {
+            buttons: false,
+            timer: 1000,
+        });   
+        setCurOrder({});
+        let danhSachReduce = layDonHang.reduce((mangOrder, order, index) => {
+            console.log(order)
+            if(order.orderID !== res.data.orderID) {
+                mangOrder.push(order);
+            }
+            return mangOrder;
+        }, []);
+        console.log(danhSachReduce)
+        setDanhSachDon(danhSachReduce);
+    }).catch(error => {
+        console.log(error.response);
+    });
+    }
      
-     const [show, setShow] = useState(false);
 
-     const handleClose = () => setShow(false);
-     const handleShow = () => setShow(true);
    
-    // const [modalShow, setModalShow] = React.useState(false);
+     const [layDonHang, setDanhSachDon] = useState([]);
+     const [curOrder, setCurOrder] = useState({});
 
+    useEffect(() => {
+        //Gọi service Api set lại state danhSachMonAn
+        if(layDonHang.length === 0) {
+            qlDonHangService.layDonHang().then(res => {
+                setDanhSachDon(res.data);
+                // console.log(res.data);
+            }).catch(error => {
+                console.log(error.response);
+            });
+        }
+        else {
+            setTimeout(() => {
+                qlDonHangService.layDonHang().then(res => {
+                    setDanhSachDon(res.data);
+                    // console.log(res.data);
+                }).catch(error => {
+                    console.log(error.response);
+                });
+            }, 60000);
+        }
+    });
+
+    const selectOrder = (order) => {
+        // console.log(order)
+        setCurOrder(order);
+    }
+
+    const renderOrderDetail = () => {
+        
+        if(Object.keys(curOrder).length === 0) {
+            
+            return <div>
+                Vui lòng chọn đơn hàng...
+                </div>
+        }
+        else {
+            
+            return <div className="order_view_panel_right col-md-12" >
+            <Grid item xs={12}><Paper className={classes.paper} elevation={0}><b><h5>ORDER DETAILS</h5></b></Paper></Grid>
+            <Grid container 
+                direction="row"
+                justify="flex-start"
+                alignItems="baseline" >
+                    <Paper variant ="outlined" elevation={0}>
+                    <Grid container xs={12} spacing={3}> 
+                    <Grid item xs={6} >
+                        <Paper elevation={0}  className={classes.paper} ><b><h5>Order No: {curOrder.orderID}</h5></b></Paper>
+                    </Grid>
+                    <Grid  item xs={6}>
+                        <Paper elevation={0} className={classes.paper}  >Status: {curOrder.orderStatus}</Paper>
+                    </Grid >
+                    <Grid item xs={6}>
+                        <Paper elevation={0}  className={classes.paper}> Time: {curOrder.createTime} </Paper>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <Paper elevation={0}  className={classes.paper}  >Total:<CurrencyFormat
+                      value={curOrder.totalPrice}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      suffix={"đ"}
+                    /></Paper>
+                    </Grid >
+                    <Grid item xs={12}>
+                    {curOrder.orderItems.map((orderItem, index) => {
+                        return  <Grid container spacing={3}>
+                            <Grid item xs={6} >
+                            <Paper elevation={0}  className={classes.paper} >{orderItem.name}</Paper>
+                            </Grid>
+                            <Grid  item xs>
+                            <Paper elevation={0}  className={classes.paper} >Price: <CurrencyFormat
+                      value={orderItem.price}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      suffix={"đ"}
+                    /></Paper>
+                            </Grid>
+                            <Grid  item xs>
+                            <Paper elevation={0}  className={classes.paper}>Qty:{orderItem.quantity}</Paper>
+                            </Grid>
+                        </Grid>
+                    })}
+                    </Grid>
+                    </Grid>
+                    <br/>
+                </Paper>
+               
+                <Grid container xs={12}
+                            spacing={0}
+                            direction="row"
+                            justify="center"
+                            alignItems="flex-end">
+                                 <Paper elevation={0}  className={classes.paper} >
+                                
+                                        <Button 
+                                           variant="outlined"
+                                            color="primary"
+                                            size="large"
+                                            >
+                                                Print
+                                        </Button>{' '}
+                                        <Button         
+                                        variant="contained"
+                                        color="primary"
+                                        size="large"
+                                       onClick={say} >
+                                            Confirm
+                                    </Button>{' '}
+                                </Paper>
+                        </Grid>
+                        
+            </Grid>
+        </div>
+        }
+    }
    return (
-       <section className ="container">
-           {/* <div className="main"> */}
+       <section className ="container">     
                <div className="order_list_panel_left">
-                   <div className="title_left_div">Title</div>
+               <Grid item xs={12}><Paper className={classes.paper} elevation={0}><b><h5>NEW ORDERS</h5></b></Paper></Grid>
                    <div className="one_order">
-                   <Card>
-                   { <Card.Header class="card-header d-flex justify-content-between ">OrderID</Card.Header>}
-                   <Card.Body className=" d-flex justify-content-between" >
-                       {/* <Card.Title >info 1</Card.Title> */}
-                       {/* <NavLink to="/">{dish.name}</NavLink> */}
-                       info 1
-                       {/* <Card.Content></Card.Content> */}
-                       <Button type="button" variant="success"  onClick= {handleShow} size="sm" >
-                       Confirm
-                       </Button>
-                   </Card.Body>
-                   </Card>
+
+                  <OrderList layDonHang={layDonHang} selectOrder={selectOrder} confirmOrder={say}/>  
                    </div>
-
-                   <div className="one_order">
-                   <Card>
-                   { <Card.Header class="card-header d-flex justify-content-between ">OrderID</Card.Header>}
-                   <Card.Body className=" d-flex justify-content-between" >
-                       {/* <Card.Title >info 1</Card.Title> */}
-                       Info o 2
-                       <Button type="button" variant="success"  onClick= {handleShow} size="sm" >
-                       Confirm
-                       </Button>
-                   </Card.Body>
-                   </Card>
-                   </div>
-
-                   <div className="one_order">
-                   <Card>
-                   { <Card.Header class="card-header d-flex justify-content-between ">OrderID</Card.Header>}
-                   <Card.Body className=" d-flex justify-content-between" >
-                       {/* <Card.Title >info 1</Card.Title> */}
-                       Info o 3
-                       <Button type="button" variant="success"  onClick= {handleShow} size="sm" >
-                       Confirm
-                       </Button>
-                   </Card.Body>
-                   </Card>
-                   </div>
-                    
-
-
 
                </div>
                        {/* RIGHT PANEL */}
-               <div className="order_view_panel_right col-md-12" >
-                   <div className ="order_view horizontal-center ">This will show order</div>
-                   <div className ="btn_div">
-                   <Button type="button"className="btn btn-secondary" size="lg"  onClick={say}>
-                           Cancel
-                       </Button>{' '}
-                       <Button type="button" className="btn btn-success" size="lg" onClick={say} >
-                           Print
-                   </Button>{' '}
-                       <Button type="button"className="btn btn-success " size="lg"   onClick={say} >
-                           Confirm
-                   </Button>{' '}
-                   </div>
-               </div>
-           {/* </div>  */}
-           <Modal        
-                show={show}
-                onHide={handleClose}
-                backdrop="static"
-                keyboard={false}
-                centered
-                size="sm"
-                >
-                <Modal.Body>
-                    Are you sure?
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                    Close
-                    </Button>
-                    <Button variant="success">Confirm</Button>
-                </Modal.Footer>
-                </Modal>
+                       <Grid item xs={12}>{renderOrderDetail()}</Grid>             
        </section> 
 
    )

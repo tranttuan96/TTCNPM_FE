@@ -4,18 +4,18 @@
 .order_list_panel_left {
     display: inline-block;
     width: 40%;
-    height: 600px;
+    height: 500px;
     overflow-y: auto;
     position:static;
+    padding: 2%;
 }
   .order_view_panel_right{
-    display: flex;
+    display: inline-block;
     width: 60%;
-    height: 600px;
-    background: #cfe2ff;
+    height: 500px;
+    //background: #cfe2ff;
     padding: 2%;
-    justify-content: center;
-       
+    justify-content: center;    
   }
   .one_order{
   height: 110px;
@@ -24,20 +24,7 @@
   padding:1%;
   background-color: green transparent;
   }
-  .title_left_div
-  {
-     //width: 40%;
-    height: 5%;
-    position:static;
-    text-align:center;
-  }
-  .btn_div
-  {
-    position:relative;
-   top:90%; 
-   left:0%;
-   
-  }
+
   .order_view
   {
   position:relative;
@@ -46,7 +33,7 @@
    height:60%;
    width:35%;
     margin-bottom: 1.5%;
-    background-color:beige;
+ //   background-color:beige;
 
     position: absolute;
     left: 50%;
