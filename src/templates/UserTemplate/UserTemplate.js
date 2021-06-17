@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState } from "react";
 import { Route, useHistory, NavLink } from "react-router-dom";
 import "./UserTemplate.scss"
 import swal from 'sweetalert';
@@ -13,7 +13,7 @@ const UserLayout = (props) => {
 
     const handleSubmit = (event) => {
         event.preventDefault(); 
-        if(keyword == "") {
+        if(keyword === "") {
             swal("Oops!", "Từ khóa rỗng.", "error");
         }
         else {

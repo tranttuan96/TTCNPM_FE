@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { NavLink } from "react-router-dom"
 import { capNhatSoLuongMonAction, xoaMonAction, xoaGioHangAction } from "../../redux/actions/GioHangAction"
@@ -74,7 +74,7 @@ export default function CartPage() {
     const renderEmptyCart = () => {
         return <div className="emptyCart">
             <div className="wrapper">
-                <img src={"./images/emptyCartIcon.png"}></img>
+                <img src={"./images/emptyCartIcon.png"} alt="emptyCart"></img>
                 <div className="notification">Không có món ăn nào trong giỏ hàng của bạn.</div>
                 <NavLink to="/" className="btn btn-primary">Chọn món ngay</NavLink>
             </div>

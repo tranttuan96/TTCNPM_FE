@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { NavLink } from "react-router-dom"
 import { useDispatch } from 'react-redux';
 import { themMonAction, capNhatSoLuongMonAction } from "../../redux/actions/GioHangAction"
@@ -52,7 +52,7 @@ export default function Dish(props) {
                     <div className="wrapper">
                         <p className="card-text"><CurrencyFormat value={dish.price} displayType={'text'} thousandSeparator={true} suffix={'đ'} /></p>
                         <div className="selectGroupBtn">
-                            {dish.status == "available" ? renderOrderBtn() : <button className="btn btn-secondary" disabled>Hết món</button>}
+                            {dish.status === "available" ? renderOrderBtn() : <button className="btn btn-secondary" disabled>Hết món</button>}
                         </div>
                     </div>
                 </div>

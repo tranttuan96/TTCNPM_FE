@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 
 import Dish from './Dish';
 import "../../assets/scss/Layout/User/ListDish.scss"
@@ -8,10 +8,10 @@ export default function ListDish(props) {
     let {danhSachMonAn, gioHang} = props;
 
     const renderListDish = () => {
-        if (gioHang.length != 0) {
+        if (gioHang.length !== 0) {
             return danhSachMonAn.map((dish, index) => {
                 let findIndex = gioHang.findIndex(orderItem => orderItem.id === dish.id);
-                if (findIndex == -1) {
+                if (findIndex === -1) {
                     return <Dish key={index} dish={dish} dishQuantity={0}></Dish>
                 }
                 else {

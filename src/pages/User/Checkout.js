@@ -107,23 +107,23 @@ export default function Checkout(props) {
         } else if (target.name === "cvc") {
             target.value = formatCVC(target.value);
         }
-        let regexName = /^[a-zA-Z ]*$/;
+        // let regexName = /^[a-zA-Z ]*$/;
         const newValues = { ...creditCard.values, [target.name]: target.value };
         const newErrors = {
             ...creditCard.errors
         };
-        if (target.name == "number") {
+        if (target.name === "number") {
             if (target.value.trim() === '') {
                 newErrors.number = 'Không được bỏ trống';
             }
-            else if (target.value.length != 19) {
+            else if (target.value.length !== 19) {
                 newErrors.number = 'Số thẻ phải bao gồm 16 số.';
             }
             else {
                 newErrors.number = "";
             }
         }
-        else if (target.name == "name") {
+        else if (target.name === "name") {
             let regexName = /^[a-zA-Z ]*$/;
             if (target.value.trim() === '') {
                 newErrors.name = 'Không được bỏ trống';
@@ -135,11 +135,11 @@ export default function Checkout(props) {
                 newErrors.name = "";
             }
         }
-        else if (target.name == "expiry") {
+        else if (target.name === "expiry") {
             if (target.value.trim() === '') {
                 newErrors.expiry = 'Không được bỏ trống';
             }
-            else if (target.value.length != 5) {
+            else if (target.value.length !== 5) {
                 newErrors.expiry = "Vui lòng điền đầy đủ thời gian.";
             }
             else {
@@ -162,13 +162,13 @@ export default function Checkout(props) {
                 }
             }
         }
-        else if (target.name == "cvc") {
+        else if (target.name === "cvc") {
         console.log(target.value.length)
 
             if (target.value.trim() === '') {
                 newErrors.cvc = 'Không được bỏ trống';
             }
-            else if (target.value.length != 3) {
+            else if (target.value.length !== 3) {
                 newErrors.cvc = "Mã bảo mật gồm 3 chữ số.";
             }
             else {
@@ -222,7 +222,7 @@ export default function Checkout(props) {
             type: "",
             cardNumber: ""
         }
-        if(paymentMethod == "creditCard") {
+        if(paymentMethod === "creditCard") {
             paymentInfo = {
                 type: paymentMethod,
                 cardNumber: creditCard.values.number
@@ -236,7 +236,7 @@ export default function Checkout(props) {
         }
         qlDonHangService.thucHienThanhToan(paymentInfo).then(res => {
 
-            if(res.data.respone == "true") {
+            if(res.data.respone === "true") {
                 let transactionInfo= {
                     transactionID: res.data.transactionID,
                     paymentType: paymentMethod,
