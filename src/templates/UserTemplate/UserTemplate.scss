@@ -32,9 +32,6 @@
     }
     .searchForm {
       display: flex;
-      
-      
-      
       .form-control {
         color: #29303b;
         border: 1px solid #f2f3f5;
@@ -46,6 +43,22 @@
           background-color: #fff;
           border: 1px solid #dedfe0;
           border-right: transparent;
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 576px) {
+    padding: 10px 10px !important;
+    .header__left {
+      .brand__name {
+        display: none;
+      }
+    }
+    .header__right {
+      .searchForm {
+        button {
+          width: 60px;
         }
       }
     }

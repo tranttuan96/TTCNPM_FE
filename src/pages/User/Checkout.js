@@ -286,7 +286,7 @@ export default function Checkout(props) {
                             </div>
                             <div className={`cardFormInput ${paymentMethod === "creditCard" ? "showSelection" : ''}`}>
                                 <div className="row">
-                                    <div className="col-6">
+                                    <div className="col-6 cardInput">
                                         <form>
                                             <div className="form-group">
                                                 <label htmlFor="number">Số thẻ</label>
@@ -301,7 +301,7 @@ export default function Checkout(props) {
                                                     onChange={handleInputChange}
                                                     onFocus={handleInputFocus}
                                                 />
-                                                <div>{creditCard.errors.number}</div>
+                                                <div className="text-warning" style={{marginBottom: 10 + 'px'}}>{creditCard.errors.number}</div>
                                             </div>
                                             <div className="form-group">
                                                 <label htmlFor="name">Tên trên thẻ</label>
@@ -315,7 +315,7 @@ export default function Checkout(props) {
                                                     onChange={handleInputChange}
                                                     onFocus={handleInputFocus}
                                                 />
-                                                <div>{creditCard.errors.name}</div>
+                                                <div className="text-warning" style={{marginBottom: 10 + 'px'}}>{creditCard.errors.name}</div>
                                             </div>
                                             <div className="row">
                                                 <div className="col-6">
@@ -331,7 +331,7 @@ export default function Checkout(props) {
                                                         onChange={handleInputChange}
                                                         onFocus={handleInputFocus}
                                                     />
-                                                    <div>{creditCard.errors.expiry}</div>
+                                                    <div className="text-warning" style={{marginBottom: 10 + 'px'}}>{creditCard.errors.expiry}</div>
                                                 </div>
                                                 <div className="col-6">
                                                     <label htmlFor="cvc">Mã bảo mật</label>
@@ -347,12 +347,12 @@ export default function Checkout(props) {
                                                         onChange={handleInputChange}
                                                         onFocus={handleInputFocus}
                                                     />
-                                                    <div>{creditCard.errors.cvc}</div>
+                                                    <div className="text-warning" style={{marginBottom: 10 + 'px'}}>{creditCard.errors.cvc}</div>
                                                 </div>
                                             </div>
                                         </form>
                                     </div>
-                                    <div className="col-6">
+                                    <div className="col-6 cardDisplay">
                                         <Cards
                                             number={creditCard.values.number}
                                             name={creditCard.values.name}

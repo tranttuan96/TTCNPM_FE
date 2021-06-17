@@ -1,5 +1,5 @@
 .homepage {
-  padding: 0 150px;
+  // padding: 0 auto;
   .menu_title {
     margin: 25px 0;
     text-align: center;
@@ -51,6 +51,15 @@
             padding: 5px;
             border-radius: 10px;
         }
+    }
+  }
+  @media only screen and (max-width: 576px) {
+    .cartInfo__wrapper {
+      top: calc(100vh - 45px);
+      right: 0;
+      width: 100%;
+      border-radius: 0;
+      padding: 25px;
     }
   }
 }

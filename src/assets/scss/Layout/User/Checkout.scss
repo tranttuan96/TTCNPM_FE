@@ -1,12 +1,12 @@
 .checkoutPage {
-  padding: 0 80px;
+  padding: 0 50px;
   padding-top: 20px;
   margin-bottom: 30px;
   h4 {
     color: rgb(95, 95, 95);
   }
   .listPaymentMethod {
-    padding-right: 20px;
+    padding-right: 10px;
     .listPaymentMethod__content {
       border: 1px solid #6e6e6e9f;
       border-radius: 5px;
@@ -167,5 +167,104 @@
       margin-top: 10px;
       width: 100%;
     }
+  }
+
+  @media only screen and (max-width: 1100px) {
+    .listPaymentMethod {
+      width: 100%;
+    }
+    .summary {
+      margin-top: 20px;
+      width: 100%;
+    }
+  }
+
+  @media only screen and (max-width: 800px) {
+    .listPaymentMethod {
+      .listPaymentMethod__content {
+        .listBank {
+          grid-template-columns: repeat(5, 1fr);
+        }
+      }
+      
+      .cardDisplay {
+        display: none;
+      }
+      .cardInput {
+        width: 100%;
+      }
+    }
+    .summary {
+      margin-top: 20px;
+      width: 100%;
+    }
+  }
+  @media only screen and (max-width: 600px) {
+    padding: 0 30px;
+    padding-top: 20px;
+    .listPaymentMethod {
+      .listPaymentMethod__content {
+        .listBank {
+          grid-template-columns: repeat(4, 1fr);
+          margin-left: 0px;
+        }
+        .eWalletSelection {
+          margin-left: 0px;
+        }
+  
+  
+        .cardFormInput {
+          margin-left: 0px;
+        }
+      }
+    }
+  }
+  @media only screen and (max-width: 500px) {
+    .listPaymentMethod {
+      .listPaymentMethod__content {
+        padding: 10px;
+        .listBank {
+          grid-template-columns: repeat(4, 1fr);
+        }
+        .form-check {
+
+          
+          label {
+            font-size: 15px;
+            i {
+              font-size: 15px;
+              margin-right: 5px;
+              margin-left: 10px;
+            }
+          }
+        }
+
+      }}
+  }
+  @media only screen and (max-width: 400px) {
+    font-size: 12px;
+    h4 {
+      font-size: 20px;
+    }
+    .listPaymentMethod {
+      .listPaymentMethod__content {
+        padding: 10px;
+        .listBank {
+          grid-template-columns: repeat(3, 1fr);
+        }
+        .form-check {
+
+          
+          label {
+            font-size: 10px;
+            i {
+              font-size: 12px;
+              margin-right: 5px;
+              margin-left: 10px;
+            }
+          }
+        }
+
+      }}
   }
 }

@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { Route, useHistory, NavLink } from "react-router-dom";
 import "./UserTemplate.scss"
-
+import swal from 'sweetalert';
 
 const UserLayout = (props) => {
     let history = useHistory();
@@ -14,7 +14,7 @@ const UserLayout = (props) => {
     const handleSubmit = (event) => {
         event.preventDefault(); 
         if(keyword == "") {
-            alert("Từ khóa rỗng.")
+            swal("Oops!", "Từ khóa rỗng.", "error");
         }
         else {
             // history.replace({ pathname:`/search/keyword=${keyword}` })

@@ -44,7 +44,7 @@ export default function Dish(props) {
     }
 
     return (
-        <div className="col-4 monAn">
+        <div className="col-6 col-lg-3 col-md-4 monAn">
             <div className="card">
                 <NavLink to="/"><img src={`${domain}/${dish.photo}`} className="card-img-top" alt="dishImg" /></NavLink>
                 <div className="card-body">

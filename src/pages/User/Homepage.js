@@ -39,7 +39,7 @@ export default function Homepage() {
 
 
     return (
-        <div className="homepage">
+        <div className="homepage container">
             <h3 className="menu_title">Thực đơn</h3>
             <ListDish danhSachMonAn={danhSachMonAn} gioHang={thongTinGioHang.gioHang}></ListDish>
             {thongTinGioHang.totalQuantity > 0 ? renderCartInfo() : <div></div>}

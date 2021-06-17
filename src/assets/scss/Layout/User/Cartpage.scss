@@ -68,7 +68,7 @@
           padding: 0 15px;
 
           .itemInfo__name{
-            font-size: 30px;
+            font-size: 25px;
             font-weight: 600;
             text-transform: uppercase;
           }
@@ -81,6 +81,212 @@
 
           button {
             margin-top: 80px;
+          }
+        }
+      }
+    }
+  }
+  @media only screen and (max-width: 992px) {
+    padding: 0 50px;
+    .summary {
+      font-size: 14px;
+  
+      .summary_content {
+ 
+        .finalPrice {  
+          .finalPrice__value {
+            text-align: right;
+            span {
+              color: green;
+              font-size: 20px;
+            }
+          }
+        }
+      }
+  
+      button {
+        margin-top: 10px;
+        width: 100%;
+      }
+    }
+    .listItem {
+      .item {
+        .itemInfo {
+          .itemInfo__img {
+            img {
+              width: 150px;
+              height: 150px;
+            }
+          }
+          .itemInfo__detail {
+            padding: 0 15px;
+  
+            .itemInfo__name{
+              font-size: 22px;
+              font-weight: 600;
+              text-transform: uppercase;
+            }
+  
+            .itemInfo__price{
+              font-size: 20px;
+              letter-spacing: 1px;
+              
+            }
+  
+            button {
+              margin-top: 50px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 800px) {
+    .listItem {
+      width: 100%;
+      padding-right: 0;
+    }
+    .summary {
+      width: 100%;
+      padding-left: 0;
+      margin-bottom: 20px;
+    }
+  }
+  @media only screen and (max-width: 600px) {
+    padding: 0 30px;
+    .summary {
+      font-size: 14px;
+  
+      .summary_content {
+ 
+        .finalPrice {  
+          .finalPrice__value {
+            text-align: right;
+            span {
+              color: green;
+              font-size: 20px;
+            }
+          }
+        }
+      }
+  
+      button {
+        margin-top: 10px;
+        width: 100%;
+      }
+    }
+    .listItem {
+      .item {
+        .itemInfo {
+          display: block;
+          .itemInfo__img {
+            img {
+              width: 150px;
+              height: 150px;
+            }
+          }
+          .itemInfo__detail {
+            padding: 0;
+
+            button {
+              margin-top: 5px;
+            }
+          }
+        }
+      }
+    }
+  }
+  // @media only screen and (max-width: 480px) {
+  //   .summary {
+  //     font-size: 14px;
+  
+  //     .summary_content {
+ 
+  //       .finalPrice {  
+  //         .finalPrice__value {
+  //           text-align: right;
+  //           span {
+  //             color: green;
+  //             font-size: 20px;
+  //           }
+  //         }
+  //       }
+  //     }
+  
+  //     button {
+  //       margin-top: 10px;
+  //       width: 100%;
+  //     }
+  //   }
+  //   .listItem {
+  //     .item {
+  //       .itemInfo {
+          
+  //         .itemInfo__img {
+  //           img {
+  //             width: 100px;
+  //             height: 100px;
+  //           }
+  //         }
+  //         .itemInfo__detail {
+  //           padding: 0 15px;
+  
+  //           button {
+  //             margin-top: 10px;
+  //           }
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
+  @media only screen and (max-width: 400px) {
+    .title {
+      font-size: 20px;
+    }
+    .summary {
+      font-size: 14px;
+  
+      .summary_content {
+ 
+        .finalPrice {  
+          .finalPrice__value {
+            text-align: right;
+            span {
+              color: green;
+              font-size: 20px;
+            }
+          }
+        }
+      }
+  
+      button {
+        margin-top: 10px;
+        width: 100%;
+      }
+    }
+    .listItem {
+      .item {
+        display: block;
+        position: relative;
+        .itemChange {
+          position: absolute;
+          right: 15px;
+          top: 20px;
+        }
+        .itemInfo {
+          .itemInfo__img {
+            img {
+              width: 150px;
+              height: 150px;
+            }
+          }
+          .itemInfo__detail {
+            padding: 0;
+  
+            button {
+              margin-top: 5px;
+            }
           }
         }
       }
@@ -107,6 +313,21 @@
       font-size: 20px;
     }
   }
+  @media only screen and (max-width: 600px) {
+    .wrapper {
+      img {
+        width: 150px;
+      }
+      .notification {
+        font-size: 25px;
+        margin-top: 10px;
+        margin-bottom: 20px;
+      }
+      a {
+        font-size: 20px;
+      }
+    }
+  }
 }
 
 .orderConfirmed {
@@ -129,4 +350,6 @@
       font-size: 25px;
     }
   }
+
+  
 }
